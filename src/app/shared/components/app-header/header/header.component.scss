@@ -1,0 +1,14 @@
+.mat-toolbar {
+  justify-content: flex-end;
+}
+
+.app-navigation {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-item {
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}

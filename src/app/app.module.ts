@@ -9,6 +9,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {MaterialModule} from './material/material.module';
 import {FirebaseModule} from './firebase/firebase.module';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {FirebaseModule} from './firebase/firebase.module';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     FirebaseModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

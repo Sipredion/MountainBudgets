@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, of, pipe} from 'rxjs';
 import {UserProfile} from '../models/user-profile.model';
 import ActionCodeSettings = firebase.auth.ActionCodeSettings;
+import {UserProfileService} from './user-profile.service';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,42 +24,37 @@ export class UserAuthService {
 
   _isAuthenticated: boolean;
 
-  constructor(private authState: AngularFireAuth) {
+  constructor(private authState: AngularFireAuth,
+              private profileService: UserProfileService) {
     authState.authState.subscribe(user => {
+      // TODO: Create a splash screen to display while the user is re-authenticated.
       if (!user) {
         // If the authState does not return a user object, nullify values and return.
         this.isAuthenticated = false;
         this.userProfileSource.next(null);
         return;
       }
-      this.isAuthenticated = true;
-      // TODO: fetch the user object and push it into the userProfile BehaviourSubject.
-      // TODO: Store the user object in session storage for faster retrieval?
+      this.profileService.getCurrentUserProfile(user.uid).subscribe(authUser => {
+        // TODO: Store the user object in session storage for faster retrieval?
+        this.userProfileSource.next(authUser.data());
+        this.isAuthenticated = true;
+      });
     });
   }
 
-  // TODO: make sure the function returns a promise of type <UserProfile>.
-  createNewAuthorisedUser(user: UserProfile, password: string) {
-    const email = user.email;
-    const actionCodeSettings: ActionCodeSettings = {
-      url: 'http://localhost:4200',
-      handleCodeInApp: true
-    };
+  createNewAuthorisedUser(user: UserProfile, password: string): Promise<void> {
     // TODO: Send an email for user verification.
-    this.authState.auth.createUserWithEmailAndPassword(email, password)
+    return this.authState.auth.createUserWithEmailAndPassword(user.email, password)
       .then(authUser => {
-        // Send email verification. Not tested.
-        authUser.user.sendEmailVerification(actionCodeSettings)
-          .then(m => {
-            console.log(m);
-          })
-          .catch(error => {
-            console.log(error);
-            // TODO: Create a logging system to catch and handle errors.
+        console.log(authUser);
+        // Create the user profile and subscribe to the returned observable.
+        this.profileService.createNewUserProfile(user, authUser.user.uid)
+          .then(user$ => {
+            user$.subscribe(profile => {
+              this.userProfileSource.next(profile.data);
+              this.isAuthenticated = true;
+            });
           });
-        this.isAuthenticated = true;
-        // TODO: create the UserProfile object using the values returned from the promise.
-        // TODO: fetch the user object and push it into the userProfile BehaviourSubject.
       })
       .catch(error => {
         console.log(error);
@@ -65,12 +62,13 @@ export class UserAuthService {
       });
   }
 
-  authoriseExistingUser(email: string, password: string) {
-    this.authState.auth.signInWithEmailAndPassword(email, password)
+  authoriseExistingUser(email: string, password: string): Promise<void> {
+    return this.authState.auth.signInWithEmailAndPassword(email, password)
       .then(authUser => {
-        this.isAuthenticated = true;
-        // TODO: create the UserProfile object using the values returned from the promise.
-        // TODO: fetch the user object and push it into the userProfile BehaviourSubject.
+        this.profileService.getCurrentUserProfile(authUser.user.uid).subscribe(user => {
+          this.userProfileSource.next(user.data());
+          this.isAuthenticated = true;
+        });
       })
       .catch(error => {
         console.log(error);
@@ -78,7 +76,7 @@ export class UserAuthService {
       });
   }
 
-  signOutAuthorisedUser() {
-    this.authState.auth.signOut();
+  signOutAuthorisedUser(): Promise<void> {
+    return this.authState.auth.signOut();
   }
 }

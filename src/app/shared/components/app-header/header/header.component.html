@@ -1,0 +1,28 @@
+<section class="app-header">
+  <mat-toolbar>
+    <nav class="app-navigation">
+      <ng-container *ngIf="authService.isAuthenticated; then userMenu; else anonMenu"></ng-container>
+    </nav>
+  </mat-toolbar>
+</section>
+
+<ng-template #userMenu>
+  <small>
+    <a class="nav-item">Dashboard</a>
+  </small>
+  <small>
+    <a class="nav-item">Budgets</a>
+  </small>
+  <small>
+    <a class="nav-item" (click)="logout()">Logout</a>
+  </small>
+</ng-template>
+
+<ng-template #anonMenu>
+  <small>
+    <a routerLink="/user/login" class="nav-item">Login</a>
+  </small>
+  <small>
+    <a routerLink="/user/register" class="nav-item">Register</a>
+  </small>
+</ng-template>

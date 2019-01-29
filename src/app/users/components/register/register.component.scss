@@ -1,0 +1,36 @@
+.login {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  width: 18rem;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-button {
+  width: 80%;
+}
+
+.text-info {
+  margin-top: .8rem;
+  color: dodgerblue;
+  cursor: pointer;
+  &:hover {
+    color: lighten(dodgerblue, 10%);
+  }
+}
