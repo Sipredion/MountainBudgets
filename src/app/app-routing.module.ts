@@ -5,6 +5,15 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: './users/users.module#UsersModule'
+  },
+  {
+    path: 'budget',
+    loadChildren: './budgets/budgets.module#BudgetsModule'
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/budget/dashboard'
   }
 ];
 
