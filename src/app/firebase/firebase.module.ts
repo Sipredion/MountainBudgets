@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -16,6 +16,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule
-  ]
+  ],
+  // Remove deprecated call from firestore settings.
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }]
 })
 export class FirebaseModule { }

@@ -20,7 +20,7 @@ import {FirebaseModule} from './firebase/firebase.module';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     FirebaseModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
