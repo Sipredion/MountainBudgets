@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 import {MaterialModule} from '../material/material.module';
 import {HeaderComponent} from './components/app-header/header/header.component';
 import {RouterModule} from '@angular/router';
+import {AppButtonDirective} from './directives/app-button.directive';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    AppButtonDirective,
   ],
   imports: [
     CommonModule,
@@ -14,7 +16,8 @@ import {RouterModule} from '@angular/router';
     MaterialModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    AppButtonDirective,
   ]
 })
 export class SharedModule {

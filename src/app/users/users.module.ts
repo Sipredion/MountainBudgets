@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import {MaterialModule} from '../material/material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RegisterComponent } from './components/register/register.component';
     CommonModule,
     UsersRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
    exports: [
      LoginComponent
