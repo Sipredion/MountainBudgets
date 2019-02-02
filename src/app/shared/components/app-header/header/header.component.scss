@@ -2,6 +2,14 @@
   justify-content: flex-end;
 }
 
+.profile-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100vh;
+}
+
 .app-navigation {
   width: 50%;
   display: flex;
