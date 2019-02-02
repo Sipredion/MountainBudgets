@@ -1,18 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UserAuthService} from '../../../../users/services/user-auth.service';
 import {Router} from '@angular/router';
+import {UserProfile} from '../../../../users/models/user-profile.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() user: UserProfile;
+
+  @ViewChild('profileButton') profileButton: ElementRef;
+
+  profileState = 'initial';
+
   constructor(public authService: UserAuthService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
+  }
+
+  closeProfile() {
+    this.profileState = 'closed';
   }
 
   logout() {

@@ -1,5 +1,10 @@
 <section class="app-header">
   <mat-toolbar color="primary">
+    <div class="profile-button" *ngIf="authService.isAuthenticated && user">
+      <app-profile-button>
+        <app-profile [user]="user"></app-profile>
+      </app-profile-button>
+    </div>
     <nav class="app-navigation">
       <ng-container *ngIf="authService.isAuthenticated; then userMenu; else anonMenu"></ng-container>
     </nav>
@@ -12,9 +17,6 @@
   </small>
   <small>
     <a routerLink="/budget/list" class="nav-item">Budgets</a>
-  </small>
-  <small>
-    <a class="nav-item" (click)="logout()">Logout</a>
   </small>
 </ng-template>
 
