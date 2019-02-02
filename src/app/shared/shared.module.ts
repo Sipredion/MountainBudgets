@@ -4,11 +4,13 @@ import {MaterialModule} from '../material/material.module';
 import {HeaderComponent} from './components/app-header/header/header.component';
 import {RouterModule} from '@angular/router';
 import {AppButtonDirective} from './directives/app-button.directive';
+import { RoundButtonDirective } from './directives/round-button.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     AppButtonDirective,
+    RoundButtonDirective,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import {AppButtonDirective} from './directives/app-button.directive';
   exports: [
     HeaderComponent,
     AppButtonDirective,
+    RoundButtonDirective
   ]
 })
 export class SharedModule {

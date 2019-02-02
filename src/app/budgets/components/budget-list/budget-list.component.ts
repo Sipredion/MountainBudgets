@@ -22,7 +22,7 @@ export class BudgetListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.authService.userProfile.subscribe(user => {
+    this.usrSubscription = this.authService.userProfile.subscribe(user => {
       if (user) {
         this.user = user;
         this.budgetService.getAllBudgetsByUser(this.user.uid);

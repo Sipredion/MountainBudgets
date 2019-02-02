@@ -1,7 +1,5 @@
 <section class="app-header">
   <mat-toolbar color="primary">
-    <div class="profile-button" *ngIf="authService.isAuthenticated && user">
-    </div>
     <nav class="app-navigation">
       <ng-container *ngIf="authService.isAuthenticated; then userMenu; else anonMenu"></ng-container>
     </nav>
