@@ -6,6 +6,7 @@ export class Budget {
   duration: BudgetDuration;
   expenses: Array<string>; // Reference to expenseIds.
   income: Array<string>; // Reference to incomeIds.
+  name: string;
   uid: string;
 
   constructor(options: any) {
@@ -14,6 +15,7 @@ export class Budget {
     this.duration = options && options.duration;
     this.expenses = options && options.expenses || [];
     this.income = options && options.income || [];
+    this.name = options && options.name;
     this.uid = options && options.uid;
   }
 }
