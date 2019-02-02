@@ -1,3 +1,22 @@
-<p>
-  budget-list works!
-</p>
+<ng-container *ngIf="authService.userProfile | async as user">
+  <mat-card>
+    <div class="flex-right">
+      <mat-card-title>{{user.username}}'s Budgets</mat-card-title>
+    </div>
+  </mat-card>
+  <div class="budget-list">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Budget Name</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="budget-details">
+          <p class="budget-details-type">Budget for (duration)</p>
+          <small>Total Income: <span>R10,000.00</span></small>
+          <small>Total Expenses: <span>R5,000.00</span></small>
+          <button app-button color="accent">Open Budget</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</ng-container>

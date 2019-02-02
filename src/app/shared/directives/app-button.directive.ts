@@ -19,6 +19,11 @@ export class AppButtonDirective implements OnInit {
     this.onMouseClick();
   }
 
+  @HostListener('touch')
+  touch() {
+    this.el.nativeElement.style.color = 'green';
+  }
+
   @HostListener('mouseup')
   clickReset() {
     this.onMouseClickReset();
