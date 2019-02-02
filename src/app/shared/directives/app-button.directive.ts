@@ -6,8 +6,13 @@ import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core'
 export class AppButtonDirective implements OnInit {
 
   @Input() color: string;
+  @Input() size: string;
+
   buttonColor: string;
-  butonFocusColor: string;
+  buttonFocusColor: string;
+
+  buttonPadding: string;
+  textSize: string;
 
   @HostListener('focus')
   focus() {
@@ -63,11 +68,13 @@ export class AppButtonDirective implements OnInit {
 
   setInitialStyle() {
     this.setButtonColor();
+    this.setButtonSize();
     // Set initial style
     this.el.nativeElement.style.border = 0;
     this.el.nativeElement.style.borderRadius = '4px';
     this.el.nativeElement.style.backgroundColor = 'transparent';
-    this.el.nativeElement.style.padding = '.5rem';
+    this.el.nativeElement.style.padding = this.buttonPadding;
+    this.el.nativeElement.style.fontSize = this.textSize;
     this.el.nativeElement.style.cursor = 'pointer';
     this.el.nativeElement.style.outline = `none`;
     this.el.nativeElement.style.color = `rgb(${this.buttonColor})`;
@@ -78,26 +85,51 @@ export class AppButtonDirective implements OnInit {
     switch (this.color) {
       case 'primary':
         this.buttonColor = '46, 134, 171';
-        this.butonFocusColor = '30, 87, 112';
+        this.buttonFocusColor = '30, 87, 112';
         break;
       case 'accent':
         this.buttonColor = '114, 157, 57';
-        this.butonFocusColor = '73, 102, 36';
+        this.buttonFocusColor = '73, 102, 36';
         break;
       case 'warn':
         this.buttonColor = '191, 0, 18';
-        this.butonFocusColor = '114, 0, 10';
+        this.buttonFocusColor = '114, 0, 10';
         break;
       default:
         this.buttonColor = '61, 61, 61';
-        this.butonFocusColor = '0, 0, 0';
+        this.buttonFocusColor = '0, 0, 0';
+        break;
+    }
+  }
+
+  setButtonSize() {
+    switch (this.size) {
+      case 'xlg':
+        this.buttonPadding = '.8rem';
+        this.textSize = '16px';
+        break;
+      case 'lg':
+        this.buttonPadding = '.45rem';
+        this.textSize = '13px';
+        break;
+      case 'md':
+        this.buttonPadding = '.3rem';
+        this.textSize = '11px';
+        break;
+      case 'sm':
+        this.buttonPadding = '.2rem';
+        this.textSize = '10px';
+        break;
+      default:
+        this.buttonPadding = '.45rem';
+        this.textSize = '13px';
         break;
     }
   }
 
   onElementFocus() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.butonFocusColor}, 0.8), 0 0 1px rgba(${this.butonFocusColor}, 0.53)`;
-    this.el.nativeElement.style.color = `rgb(${this.butonFocusColor})`;
+    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.buttonFocusColor}, 0.8), 0 0 1px rgba(${this.buttonFocusColor}, 0.53)`;
+    this.el.nativeElement.style.color = `rgb(${this.buttonFocusColor})`;
   }
 
   onMouseClick() {
@@ -105,7 +137,7 @@ export class AppButtonDirective implements OnInit {
   }
 
   onMouseClickReset() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.butonFocusColor}, 0.8), 0 0 1px rgba(${this.butonFocusColor}, 0.53)`;
+    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.buttonFocusColor}, 0.8), 0 0 1px rgba(${this.buttonFocusColor}, 0.53)`;
   }
 
   onMouseHover() {

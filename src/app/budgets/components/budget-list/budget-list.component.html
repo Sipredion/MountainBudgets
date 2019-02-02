@@ -12,9 +12,15 @@
         </mat-expansion-panel-header>
         <div class="budget-details">
           <p class="budget-details-type">Budget for (duration)</p>
-          <small>Total Income: <span>R10,000.00</span></small>
-          <small>Total Expenses: <span>R5,000.00</span></small>
-          <button app-button color="accent">Open Budget</button>
+          <div class="financial-details">
+            <small>Total Income:</small>
+            <small>R10,000.00</small>
+          </div>
+          <div class="financial-details">
+            <small>Total Expenses:</small>
+            <small>R5,000.00</small>
+          </div>
+          <button app-button color="accent" size="md" class="open-budget">Open Budget</button>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
