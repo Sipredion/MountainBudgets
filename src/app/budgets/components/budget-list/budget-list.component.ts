@@ -4,6 +4,7 @@ import {Budget} from '../../models/budget.model';
 import {BudgetService} from '../../services/budget.service';
 import {Subscription} from 'rxjs';
 import {UserProfile} from '../../../users/models/user-profile.model';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-budget-list',
@@ -15,10 +16,12 @@ export class BudgetListComponent implements OnInit, OnDestroy {
   usrSubscription: Subscription;
   user: UserProfile;
 
-  budgetList: Array<Budget> = [];
+  dialogRef: MatDialogRef<any>;
+  dialogConfig: MatDialogConfig;
 
   constructor(public authService: UserAuthService,
-              public budgetService: BudgetService) {
+              public budgetService: BudgetService,
+              private dialogService: MatDialog) {
   }
 
   ngOnInit() {
@@ -32,6 +35,13 @@ export class BudgetListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.usrSubscription.unsubscribe();
+  }
+
+  openNewBudgetDialog(template) {
+    this.dialogConfig = {
+      width: '90%'
+    };
+    this.dialogRef = this.dialogService.open(template, this.dialogConfig);
   }
 
 }

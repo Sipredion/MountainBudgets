@@ -1,0 +1,33 @@
+<section class="new-budget">
+  <div class="new-budget-title">
+    <h4 class="title">Add a new Budget</h4>
+  </div>
+  <hr class="app-divider">
+  <form [formGroup]="newBudgetForm" (ngSubmit)="createNewBudget(newBudgetForm)" class="new-budget-form">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Budget Name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Budget Duration</mat-label>
+      <select matNativeControl formControlName="duration">
+        <option value="Day">Day</option>
+        <option value="Week">Week</option>
+        <option value="Month">Month</option>
+        <option value="Year">Year</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Type of Budget</mat-label>
+      <select matNativeControl formControlName="budgetType">
+        <option value="Personal">Personal</option>
+        <option value="Business">Business</option>
+        <option value="Household">Household</option>
+      </select>
+    </mat-form-field>
+
+    <button app-button color="primary" size="md" class="create-button" type="submit">Create Budget</button>
+    <button app-button color="warn" size="sm" class="cancel-button" type="button" (click)="closeDialog()">cancel</button>
+  </form>
+</section>

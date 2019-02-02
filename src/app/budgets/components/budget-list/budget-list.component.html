@@ -27,7 +27,11 @@
       </ng-container>
     </mat-accordion>
   </div>
-  <button app-round-button color="primary" size="md">
+  <button app-round-button color="primary" size="lg" class="add-budget" (click)="openNewBudgetDialog(newBudget)">
     <mat-icon>add</mat-icon>
   </button>
 </ng-container>
+
+<ng-template #newBudget>
+  <app-add-budget [dialogRef]="dialogRef" [user]="user"></app-add-budget>
+</ng-template>

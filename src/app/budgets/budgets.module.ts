@@ -6,12 +6,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {SharedModule} from '../shared/shared.module';
 import {MaterialModule} from '../material/material.module';
 import { BudgetListComponent } from './components/budget-list/budget-list.component';
+import { AddBudgetComponent } from './components/add-budget/add-budget.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [DashboardComponent, BudgetListComponent],
+  declarations: [DashboardComponent, BudgetListComponent, AddBudgetComponent],
   imports: [
     CommonModule,
     BudgetsRoutingModule,
+    ReactiveFormsModule,
     SharedModule,
     MaterialModule
   ]
