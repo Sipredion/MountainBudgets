@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserAuthService} from '../../../users/services/user-auth.service';
 
 @Component({
   selector: 'app-budget-list',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: UserAuthService) {
+  }
 
   ngOnInit() {
   }

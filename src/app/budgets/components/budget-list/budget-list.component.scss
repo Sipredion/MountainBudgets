@@ -1,0 +1,15 @@
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.budget-list {
+  margin: .75rem;
+}
+
+.budget-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
