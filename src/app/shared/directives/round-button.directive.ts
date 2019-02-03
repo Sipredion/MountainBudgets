@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[app-round-button]'
@@ -14,6 +14,10 @@ export class RoundButtonDirective implements OnInit {
   buttonPadding: string;
   textSize: string;
 
+  constructor(private el: ElementRef,
+              private renderer: Renderer2) {
+  }
+
   @HostListener('focus')
   focus() {
     this.onElementFocus();
@@ -22,11 +26,6 @@ export class RoundButtonDirective implements OnInit {
   @HostListener('mousedown')
   click() {
     this.onMouseClick();
-  }
-
-  @HostListener('touch')
-  touch() {
-    this.el.nativeElement.style.color = 'green';
   }
 
   @HostListener('mouseup')
@@ -59,33 +58,89 @@ export class RoundButtonDirective implements OnInit {
     this.onMouseClickReset();
   }
 
-  constructor(private el: ElementRef) {
-  }
-
   ngOnInit() {
     this.setInitialStyle();
+  }
+
+  onElementFocus() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.53)`
+    );
+    this.renderer.setStyle(this.el.nativeElement, 'color', `rgb(${this.roundButtonFocusColor})`);
+  }
+
+  onMouseClick() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `0 2px 12px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`
+    );
+  }
+
+  onMouseClickReset() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.53)`
+    );
+  }
+
+  onMouseHover() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'background-color',
+      `rgba(${this.roundButtonColor}, 0.2)`
+    );
+  }
+
+  onMouseHoverReset() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'background-color',
+      `rgba(${this.roundButtonColor}, 0)`
+    );
+  }
+
+  unFocusButton() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `0 2px 4px rgba(${this.roundButtonColor}, 0.5), 0 0 1px rgba(${this.roundButtonColor}, 0.13)`
+    );
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'color',
+      `rgb(${this.roundButtonColor})`
+    );
+  }
+
+  resetStyle() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `0 2px 12px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`
+    );
   }
 
   setInitialStyle() {
     this.setButtonColor();
     this.setButtonSize();
+    const el = this.el.nativeElement;
     // Set initial style
-    this.el.nativeElement.style.border = 0;
-    this.el.nativeElement.style.borderRadius = '50%';
-    this.el.nativeElement.style.backgroundColor = 'transparent';
-    this.el.nativeElement.style.padding = this.buttonPadding || '.45rem';
-    this.el.nativeElement.style.fontSize = this.textSize || '13px';
-    this.el.nativeElement.style.display = 'flex';
-    this.el.nativeElement.style.justifyContent = 'center';
-    this.el.nativeElement.style.alignItems = 'center';
-    this.el.nativeElement.style.cursor = 'pointer';
-    this.el.nativeElement.style.outline = `none`;
-    this.el.nativeElement.style.color = `rgb(${this.roundButtonColor})`;
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.roundButtonColor}, 0.5), 0 0 1px rgba(${this.roundButtonColor}, 0.13)`;
+    this.renderer.addClass(el, 'round-button-initial');
+    this.renderer.setStyle(el, 'padding', this.buttonPadding || '.45rem');
+    this.renderer.setStyle(el, 'font-size', this.textSize || '13px');
+    this.renderer.setStyle(el, 'color', `rgb(${this.roundButtonColor})`);
+    this.renderer.setStyle(
+      el,
+      'box-shadow',
+      `0 2px 4px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.4)`
+    );
   }
 
   setButtonColor() {
-    console.log(this.color);
     switch (this.color) {
       case 'primary':
         this.roundButtonColor = '46, 134, 171';
@@ -129,36 +184,6 @@ export class RoundButtonDirective implements OnInit {
         this.textSize = '13px';
         break;
     }
-  }
-
-  onElementFocus() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.53)`;
-    this.el.nativeElement.style.color = `rgb(${this.roundButtonFocusColor})`;
-  }
-
-  onMouseClick() {
-    this.el.nativeElement.style.boxShadow = `0 2px 12px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`;
-  }
-
-  onMouseClickReset() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.53)`;
-  }
-
-  onMouseHover() {
-    this.el.nativeElement.style.backgroundColor = `rgba(${this.roundButtonColor}, 0.2)`;
-  }
-
-  onMouseHoverReset() {
-    this.el.nativeElement.style.backgroundColor = `rgba(${this.roundButtonColor}, 0)`;
-  }
-
-  unFocusButton() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.roundButtonColor}, 0.5), 0 0 1px rgba(${this.roundButtonColor}, 0.13)`;
-    this.el.nativeElement.style.color = `rgb(${this.roundButtonColor})`;
-  }
-
-  resetStyle() {
-    this.el.nativeElement.style.boxShadow = `0 2px 12px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`;
   }
 
 }

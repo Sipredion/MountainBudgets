@@ -24,11 +24,6 @@ export class AppButtonDirective implements OnInit {
     this.onMouseClick();
   }
 
-  @HostListener('touch')
-  touch() {
-    this.el.nativeElement.style.color = 'green';
-  }
-
   @HostListener('mouseup')
   clickReset() {
     this.onMouseClickReset();
@@ -70,6 +65,7 @@ export class AppButtonDirective implements OnInit {
     this.setButtonColor();
     this.setButtonSize();
     // Set initial style
+    // TODO: Add renderer for security purposes.
     this.el.nativeElement.style.border = 0;
     this.el.nativeElement.style.borderRadius = '4px';
     this.el.nativeElement.style.backgroundColor = 'transparent';
