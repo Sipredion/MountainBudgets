@@ -8,6 +8,7 @@ import {BudgetExpenseService} from '../../services/budget-expense.service';
 import {IncomeStream} from '../../models/income-stream.model';
 import {Expense} from '../../models/expense.model';
 import {MatDialog, MatDialogRef} from '@angular/material';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-budget-detail',
@@ -31,12 +32,15 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   budgetExpenses: Expense[] = [];
   budgetExpenseTotal: number;
 
+  isBalancePositive: boolean;
+
   dialogRef: MatDialogRef<any>;
 
   constructor(private budgetService: BudgetService,
               public incomeService: BudgetIncomeService,
               public expenseService: BudgetExpenseService,
               private route: ActivatedRoute,
+              private location: Location,
               private matDialog: MatDialog) {
   }
 
@@ -82,7 +86,12 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   }
 
   deriveBudgetAmountRemaining(incomeTotal: number, expenseTotal: number) {
+    expenseTotal > incomeTotal ? this.isBalancePositive = false : this.isBalancePositive = true;
     return incomeTotal - expenseTotal;
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

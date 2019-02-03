@@ -33,4 +33,11 @@ export class BudgetService {
         console.log(error);
       });
   }
+
+  deleteBudget(id: string): Promise<void | DocumentReference> {
+    return this.budgetsCollection.doc(id).delete()
+      .catch(error => {
+        console.log(error);
+      });
+  }
 }

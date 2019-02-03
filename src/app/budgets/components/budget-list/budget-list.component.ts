@@ -44,4 +44,8 @@ export class BudgetListComponent implements OnInit, OnDestroy {
     this.dialogRef = this.dialogService.open(template, this.dialogConfig);
   }
 
+  deleteBudget(id: string) {
+    this.budgetService.deleteBudget(id);
+  }
+
 }

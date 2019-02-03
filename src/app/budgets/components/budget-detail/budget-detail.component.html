@@ -54,7 +54,13 @@
 
     <div class="amount-after-budget">
       <h5>Amount left after budget:</h5>
-      <h3>{{(deriveBudgetAmountRemaining(budgetIncomeTotal, budgetExpenseTotal)) | currency:'ZAR':'symbol-narrow'}}</h3>
+      <h3 [class.balance-positive]="isBalancePositive" [class.balance-negative]="!isBalancePositive">
+        {{(deriveBudgetAmountRemaining(budgetIncomeTotal, budgetExpenseTotal)) | currency:'ZAR':'symbol-narrow'}}
+      </h3>
+    </div>
+
+    <div class="back">
+      <button app-button color="primary" size="lg" (click)="goBack()">Go Back</button>
     </div>
   </div>
 </ng-container>

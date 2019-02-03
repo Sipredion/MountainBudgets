@@ -46,3 +46,17 @@
   justify-content: center;
   align-items: center;
 }
+
+.balance-positive {
+  color: $accent;
+}
+
+.balance-negative {
+  color: $warn
+}
+
+.back {
+  margin: .75rem auto;
+  display: flex;
+  justify-content: center;
+}
