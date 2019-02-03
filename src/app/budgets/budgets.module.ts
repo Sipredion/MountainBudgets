@@ -10,9 +10,10 @@ import { AddBudgetComponent } from './components/add-budget/add-budget.component
 import {ReactiveFormsModule} from '@angular/forms';
 import { BudgetDetailComponent } from './components/budget-detail/budget-detail.component';
 import { AddIncomeComponent } from './components/add-income/add-income.component';
+import { AddExpenseComponent } from './components/add-expense/add-expense.component';
 
 @NgModule({
-  declarations: [DashboardComponent, BudgetListComponent, AddBudgetComponent, BudgetDetailComponent, AddIncomeComponent],
+  declarations: [DashboardComponent, BudgetListComponent, AddBudgetComponent, BudgetDetailComponent, AddIncomeComponent, AddExpenseComponent],
   imports: [
     CommonModule,
     BudgetsRoutingModule,

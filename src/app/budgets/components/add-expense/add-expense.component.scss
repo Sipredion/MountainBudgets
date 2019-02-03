@@ -1,0 +1,28 @@
+.add-expense-title {
+  text-align: center;
+}
+
+.add-expense-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-buttons {
+  margin: .6rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 6rem;
+}
+
+.form-toggles {
+  max-width: 10rem;
+  min-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
