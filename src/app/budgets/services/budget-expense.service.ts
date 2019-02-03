@@ -44,6 +44,13 @@ export class BudgetExpenseService {
       });
   }
 
+  deleteExpense(id: string): Promise<void | DocumentReference> {
+    return this.expenseCollection.doc(id).delete()
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   reduceArray(array: Array<number>): number {
     // TODO: Create service to store app-wide helper functions
     const reducer = (accumulator, currentValue) => accumulator + currentValue;

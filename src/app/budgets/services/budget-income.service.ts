@@ -44,6 +44,13 @@ export class BudgetIncomeService {
       });
   }
 
+  deleteIncome(id: string): Promise<void | DocumentReference> {
+    return this.incomeCollection.doc(id).delete()
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   reduceArray(array: Array<number>): number {
     // TODO: Create service to store app-wide helper functions
     const reducer = (accumulator, currentValue) => accumulator + currentValue;

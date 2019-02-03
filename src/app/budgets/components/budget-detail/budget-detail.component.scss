@@ -1,5 +1,9 @@
 @import "../../../../styles/partials/variables";
 
+h5 {
+  margin: .2rem;
+}
+
 .mat-card {
   padding: .1rem .75rem;
   margin: .8rem 0;
@@ -8,6 +12,16 @@
 .flex-right {
   display: flex;
   justify-content: flex-end;
+}
+
+.right-side {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.margin-right {
+  margin-right: 2rem;
 }
 
 .single-budget-details {
@@ -22,11 +36,11 @@
   border-bottom: 1px dashed black;
 }
 
-.income-item {
+.budget-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: .7rem 0;
+  margin: .2rem 0;
   small {
     font-weight: bold;
   }
@@ -34,10 +48,12 @@
 
 .total {
   color: $primary;
+  padding: .4rem 0;
 }
 
 .other-total {
   color: $accent;
+  padding: .4rem 0;
 }
 
 .amount-after-budget {
@@ -59,4 +75,25 @@
   margin: .75rem auto;
   display: flex;
   justify-content: center;
+}
+
+.touch-menu-trigger {
+  font-size: 16px;
+  margin: .2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card>:last-child:not(.mat-card-footer) {
+  margin-bottom: .5rem;
 }

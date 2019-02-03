@@ -1,4 +1,5 @@
 export class Expense {
+  id?: string;
   amount: number;
   budgetId: string;
   categoryId: string;

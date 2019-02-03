@@ -1,4 +1,7 @@
-<h3 class="add-income-title">Add new Income</h3>
+<h3 class="add-income-title">
+  <ng-container *ngIf="income">Edit Income</ng-container>
+  <ng-container *ngIf="!income">Add Income</ng-container>
+</h3>
 <hr class="app-divider">
 <form class="add-income-form" [formGroup]="incomeStreamForm" (ngSubmit)="createNewIncomeStream(incomeStreamForm)">
   <mat-form-field>
@@ -13,7 +16,10 @@
   </mat-form-field>
   <mat-slide-toggle>Recurring?</mat-slide-toggle>
   <div class="form-buttons">
-    <button app-button color="primary" size="lg" type="submit">Add Income</button>
+    <button app-button color="primary" size="lg" type="submit">
+      <ng-container *ngIf="income">Update Income</ng-container>
+      <ng-container *ngIf="!income">Add Income</ng-container>
+    </button>
     <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
   </div>
 </form>

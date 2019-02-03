@@ -14,16 +14,23 @@
             <mat-icon>add</mat-icon>
           </button>
         </div>
-        <div class="container">
+        <div class="container item-list">
           <ng-container *ngFor="let income of budgetIncomeStreams">
-            <div class="income-item">
+            <mat-menu #incomeMenu="matMenu">
+              <button mat-menu-item (click)="deleteIncomeStream(income.id)">Delete Income</button>
+              <button mat-menu-item (click)="openDialog(addIncomeTemplate, income)">Edit Income</button>
+            </mat-menu>
+            <div class="budget-item">
               <small class="income-name">{{income.name}}</small>
-              <small class="income-amount">{{income.amount | currency:'ZAR':'symbol-narrow'}}</small>
+              <div class="right-side">
+                <small class="income-amount">{{income.amount | currency:'ZAR':'symbol-narrow'}}</small>
+                <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="incomeMenu">more_vert</mat-icon>
+              </div>
             </div>
           </ng-container>
-          <div class="income-item total">
+          <div class="budget-item total">
             <small>Total:</small>
-            <small>{{budgetIncomeTotal | currency:'ZAR':'symbol-narrow'}}</small>
+            <small class="margin-right">{{budgetIncomeTotal | currency:'ZAR':'symbol-narrow'}}</small>
           </div>
         </div>
       </mat-card-content>
@@ -37,16 +44,23 @@
             <mat-icon>add</mat-icon>
           </button>
         </div>
-        <div class="container">
+        <div class="container item-list">
           <ng-container *ngFor="let expense of budgetExpenses">
-            <div class="income-item">
+            <mat-menu #expenseMenu="matMenu">
+              <button mat-menu-item (click)="deleteExpense(expense.id)">Delete Expense</button>
+              <button mat-menu-item (click)="openDialog(addExpenseTemplate, expense)">Edit Income</button>
+            </mat-menu>
+            <div class="budget-item">
               <small class="income-name">{{expense.name}}</small>
-              <small class="income-amount">{{expense.amount | currency:'ZAR':'symbol-narrow'}}</small>
+              <div class="right-side">
+                <small class="income-amount">{{expense.amount | currency:'ZAR':'symbol-narrow'}}</small>
+                <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="expenseMenu">more_vert</mat-icon>
+              </div>
             </div>
           </ng-container>
-          <div class="income-item other-total">
+          <div class="budget-item other-total">
             <small>Total:</small>
-            <small>{{budgetExpenseTotal | currency:'ZAR':'symbol-narrow'}}</small>
+            <small class="margin-right">{{budgetExpenseTotal | currency:'ZAR':'symbol-narrow'}}</small>
           </div>
         </div>
       </mat-card-content>
@@ -55,7 +69,7 @@
     <div class="amount-after-budget">
       <h5>Amount left after budget:</h5>
       <h3 [class.balance-positive]="isBalancePositive" [class.balance-negative]="!isBalancePositive">
-        {{(deriveBudgetAmountRemaining(budgetIncomeTotal, budgetExpenseTotal)) | currency:'ZAR':'symbol-narrow'}}
+        {{totalBudgetRemaining | currency:'ZAR':'symbol-narrow'}}
       </h3>
     </div>
 
@@ -66,9 +80,17 @@
 </ng-container>
 
 <ng-template #addIncomeTemplate>
-  <app-add-income [dialogRef]="dialogRef" [budgetId]="budgetId"></app-add-income>
+  <app-add-income [dialogRef]="dialogRef"
+                  [budgetId]="budgetId"
+                  [income]="selectedIncome"
+                  (clearIncome)="clearSelectedIncome()"
+  ></app-add-income>
 </ng-template>
 
 <ng-template #addExpenseTemplate>
-  <app-add-expense [dialogRef]="dialogRef" [budgetId]="budgetId"></app-add-expense>
+  <app-add-expense [dialogRef]="dialogRef"
+                   [budgetId]="budgetId"
+                   [expense]="selectedExpense"
+                   (clearExpense)="clearSelectedExpense()"
+  ></app-add-expense>
 </ng-template>

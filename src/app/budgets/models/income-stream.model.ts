@@ -1,4 +1,5 @@
 export class IncomeStream {
+  id?: string;
   amount: number;
   budgetId: string;
   isRecurring: boolean;

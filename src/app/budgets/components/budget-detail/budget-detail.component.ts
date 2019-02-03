@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BudgetService} from '../../services/budget.service';
 import {Budget} from '../../models/budget.model';
 import {ActivatedRoute} from '@angular/router';
@@ -7,7 +7,7 @@ import {BudgetIncomeService} from '../../services/budget-income.service';
 import {BudgetExpenseService} from '../../services/budget-expense.service';
 import {IncomeStream} from '../../models/income-stream.model';
 import {Expense} from '../../models/expense.model';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatMenuTrigger} from '@angular/material';
 import {Location} from '@angular/common';
 
 @Component({
@@ -17,6 +17,8 @@ import {Location} from '@angular/common';
 })
 export class BudgetDetailComponent implements OnInit, OnDestroy {
 
+  @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
+
   budgetSubscription: Subscription;
   incomeStreamSubscription: Subscription;
   expenseSubscription: Subscription;
@@ -25,12 +27,15 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
 
   budgetId: string;
   selectedBudget: Budget;
+  totalBudgetRemaining: number;
 
   budgetIncomeStreams: IncomeStream[] = [];
   budgetIncomeTotal: number;
+  selectedIncome: IncomeStream;
 
   budgetExpenses: Expense[] = [];
   budgetExpenseTotal: number;
+  selectedExpense: Expense;
 
   isBalancePositive: boolean;
 
@@ -63,31 +68,78 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
 
   fetchAllIncomeForBudget(budgetId: string) {
     this.incomeStreamSubscription = this.incomeService.getAllIncomeStreamsByBudget(budgetId).subscribe(incomeStreams => {
-      this.budgetIncomeStreams = incomeStreams.map(incomeStream => incomeStream.payload.doc.data());
+      this.budgetIncomeStreams = incomeStreams.map(incomeStream =>
+        new IncomeStream({
+          id: incomeStream.payload.doc.id,
+          amount: incomeStream.payload.doc.data().amount,
+          budgetId: incomeStream.payload.doc.data().budgetId,
+          isRecurring: incomeStream.payload.doc.data().isRecurring,
+          name: incomeStream.payload.doc.data().name,
+          type: incomeStream.payload.doc.data().type,
+        })
+      );
       this.incomeTotalSubscription = this.incomeService.budgetIncomeTotal.subscribe(incomeTotal => {
         this.budgetIncomeTotal = incomeTotal;
+        this.totalBudgetRemaining = this.deriveBudgetAmountRemaining(this.budgetIncomeTotal, this.budgetExpenseTotal);
       });
     });
   }
 
-  fetchAllExpenseForBudget(budgetId) {
+  fetchAllExpenseForBudget(budgetId: string) {
     this.expenseSubscription = this.expenseService.getAllExpensesByBudget(budgetId).subscribe(expenses => {
-      this.budgetExpenses = expenses.map(expense => expense.payload.doc.data());
+      this.budgetExpenses = expenses.map(expense =>
+        new Expense({
+          id: expense.payload.doc.id,
+          amount: expense.payload.doc.data().amount,
+          budgetId: expense.payload.doc.data().budgetId,
+          categoryName: expense.payload.doc.data().categoryName,
+          dueDate: expense.payload.doc.data().dueDate,
+          isAutomatic: expense.payload.doc.data().isAutomatic,
+          isPaid: expense.payload.doc.data().isPaid,
+          isRecurring: expense.payload.doc.data().isRecurring,
+          name: expense.payload.doc.data().name,
+          type: expense.payload.doc.data().type
+        })
+      );
       this.expenseTotalSubscription = this.expenseService.budgetExpenseTotal.subscribe(expenseTotal => {
         this.budgetExpenseTotal = expenseTotal;
+        this.totalBudgetRemaining = this.deriveBudgetAmountRemaining(this.budgetIncomeTotal, this.budgetExpenseTotal);
       });
     });
   }
 
-  openDialog(template) {
+  openDialog(template, data) {
+    if (data) {
+      if (data instanceof Expense) {
+        this.selectedExpense = data;
+      } else if (data instanceof IncomeStream) {
+        this.selectedIncome = data;
+      }
+    }
     this.dialogRef = this.matDialog.open(template, {
       width: '95%'
     });
   }
 
-  deriveBudgetAmountRemaining(incomeTotal: number, expenseTotal: number) {
+  deriveBudgetAmountRemaining(incomeTotal: number, expenseTotal: number): number {
     expenseTotal > incomeTotal ? this.isBalancePositive = false : this.isBalancePositive = true;
     return incomeTotal - expenseTotal;
+  }
+
+  deleteIncomeStream(id: string) {
+    this.incomeService.deleteIncome(id);
+  }
+
+  deleteExpense(id: string) {
+    this.expenseService.deleteExpense(id);
+  }
+
+  clearSelectedIncome() {
+    this.selectedIncome = null;
+  }
+
+  clearSelectedExpense() {
+    this.selectedExpense = null;
   }
 
   goBack() {
