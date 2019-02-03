@@ -1,0 +1,19 @@
+.add-income-title {
+  text-align: center;
+}
+
+.add-income-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-buttons {
+  margin: .6rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 6rem;
+}

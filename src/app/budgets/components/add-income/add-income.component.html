@@ -1,0 +1,19 @@
+<h3 class="add-income-title">Add new Income</h3>
+<hr class="app-divider">
+<form class="add-income-form" [formGroup]="incomeStreamForm" (ngSubmit)="createNewIncomeStream(incomeStreamForm)">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Name" formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Amount" formControlName="amount">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Type" formControlName="type">
+    <mat-icon matSuffix matTooltip="Type of Income. E.G: Salary, Loan, Business, etc">help_outline</mat-icon>
+  </mat-form-field>
+  <mat-slide-toggle>Recurring?</mat-slide-toggle>
+  <div class="form-buttons">
+    <button app-button color="primary" size="lg" type="submit">Add Income</button>
+    <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
+  </div>
+</form>

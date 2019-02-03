@@ -37,7 +37,6 @@ export class AddBudgetComponent implements OnInit {
       const budget = new Budget(form.value);
       budget.createdOn = new Date();
       budget.uid = this.user.uid;
-      console.log(budget);
       this.budgetService.addBudget(Object.assign({}, budget))
         .then((ref: DocumentReference) => {
           this.router.navigateByUrl(`/budget/detail/${ref.id}`);

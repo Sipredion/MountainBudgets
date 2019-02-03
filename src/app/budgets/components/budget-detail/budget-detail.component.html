@@ -10,7 +10,7 @@
       <mat-card-content>
         <div class="card-top">
           <h4>Income</h4>
-          <button app-round-button color="primary" size="sm">
+          <button app-round-button color="primary" size="sm" (click)="openDialog(addIncomeTemplate)">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -59,6 +59,8 @@
   </div>
 </ng-container>
 
-<ng-template #addIncomeTemplate></ng-template>
+<ng-template #addIncomeTemplate>
+  <app-add-income [dialogRef]="dialogRef" [budgetId]="budgetId"></app-add-income>
+</ng-template>
 
 <ng-template #addExpenseTemplate></ng-template>

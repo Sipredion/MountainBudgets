@@ -7,6 +7,7 @@ import {BudgetIncomeService} from '../../services/budget-income.service';
 import {BudgetExpenseService} from '../../services/budget-expense.service';
 import {IncomeStream} from '../../models/income-stream.model';
 import {Expense} from '../../models/expense.model';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-budget-detail',
@@ -21,6 +22,7 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   incomeTotalSubscription: Subscription;
   expenseTotalSubscription: Subscription;
 
+  budgetId: string;
   selectedBudget: Budget;
 
   budgetIncomeStreams: IncomeStream[] = [];
@@ -29,18 +31,21 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   budgetExpenses: Expense[] = [];
   budgetExpenseTotal: number;
 
+  dialogRef: MatDialogRef<any>;
+
   constructor(private budgetService: BudgetService,
               public incomeService: BudgetIncomeService,
               public expenseService: BudgetExpenseService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private matDialog: MatDialog) {
   }
 
   ngOnInit() {
-    const budgetId = this.route.snapshot.params['id'];
-    this.budgetSubscription = this.budgetService.getBudgetById(budgetId).subscribe(budget => {
+    this.budgetId = this.route.snapshot.params['id'];
+    this.budgetSubscription = this.budgetService.getBudgetById(this.budgetId).subscribe(budget => {
       this.selectedBudget = budget;
-      this.fetchAllIncomeForBudget(budgetId);
-      this.fetchAllExpenseForBudget(budgetId);
+      this.fetchAllIncomeForBudget(this.budgetId);
+      this.fetchAllExpenseForBudget(this.budgetId);
     });
   }
 
@@ -67,6 +72,12 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
       this.expenseTotalSubscription = this.expenseService.budgetExpenseTotal.subscribe(expenseTotal => {
         this.budgetExpenseTotal = expenseTotal;
       });
+    });
+  }
+
+  openDialog(template) {
+    this.dialogRef = this.matDialog.open(template, {
+      width: '95%'
     });
   }
 
