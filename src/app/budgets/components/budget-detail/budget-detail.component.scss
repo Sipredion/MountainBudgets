@@ -1,0 +1,52 @@
+@import "../../../../styles/partials/variables";
+
+p, h3, h5 {
+  margin: .3rem;
+}
+
+.mat-card {
+  padding: .1rem .75rem;
+  margin: .8rem 0;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.single-budget-details {
+  width: 85%;
+  margin: 1rem auto;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed black;
+}
+
+.income-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: .7rem 0;
+  small {
+    font-weight: bold;
+  }
+}
+
+.total {
+  color: $primary;
+}
+
+.other-total {
+  color: $accent;
+}
+
+.amount-after-budget {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, DocumentReference} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, DocumentReference} from '@angular/fire/firestore';
 import {Budget} from '../models/budget.model';
 import {Observable} from 'rxjs';
 
@@ -9,17 +9,22 @@ import {Observable} from 'rxjs';
 export class BudgetService {
 
   private budgetsCollection: AngularFirestoreCollection<Budget>;
-  userBudgets: Observable<Budget[]>;
+  userBudgets: Observable<DocumentChangeAction<Budget>[]>;
+  selectedBudget: Observable<Budget>;
 
   constructor(private data: AngularFirestore) {
     this.budgetsCollection = data.collection<Budget>('budgets');
   }
 
-  getAllBudgetsByUser(uid: string): Observable<Budget[]> {
+  getAllBudgetsByUser(uid: string): Observable<DocumentChangeAction<Budget>[]> {
     return this.userBudgets = this.data.collection<Budget>(
       'budgets',
       ref => ref.where('uid', '==', uid)
-    ).valueChanges();
+    ).snapshotChanges();
+  }
+
+  getBudgetById(id: string) {
+    return this.selectedBudget = this.budgetsCollection.doc<Budget>(id).valueChanges();
   }
 
   addBudget(budget: Budget): Promise<void | DocumentReference> {

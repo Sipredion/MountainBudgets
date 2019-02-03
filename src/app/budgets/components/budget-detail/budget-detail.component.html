@@ -1,0 +1,81 @@
+<ng-container *ngIf="selectedBudget">
+  <mat-card>
+    <div class="flex-right">
+      <mat-card-title>{{selectedBudget.name}}</mat-card-title>
+    </div>
+  </mat-card>
+
+  <div class="single-budget-details">
+    <mat-card>
+      <mat-card-content>
+        <div class="card-top">
+          <h4>Income</h4>
+          <button app-round-button color="primary" size="sm">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="container">
+          <div class="income-item">
+            <small class="income-name">Salary from Solinta</small>
+            <small class="income-amount">R10, 000.00</small>
+          </div>
+          <div class="income-item total">
+            <small>Total:</small>
+            <small>R10, 000.00</small>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <div class="card-top">
+          <h4>Expenses</h4>
+          <button app-round-button color="accent" size="sm">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="container">
+          <div class="income-item">
+            <small class="income-name">Rent</small>
+            <small class="income-amount">R2, 500.00</small>
+          </div>
+          <div class="income-item">
+            <small class="income-name">Water & Lights</small>
+            <small class="income-amount">R1, 361.84</small>
+          </div>
+          <div class="income-item other-total">
+            <small>Total:</small>
+            <small>R3, 861.84</small>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <div class="card-top">
+          <h4>Savings</h4>
+          <button app-round-button color="accent" size="sm">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="container">
+          <div class="income-item">
+            <small class="income-name">Car</small>
+            <small class="income-amount">R2, 000.00</small>
+          </div>
+          <div class="income-item other-total">
+            <small>Total:</small>
+            <small>R2, 000.00</small>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="amount-after-budget">
+      <h5>Amount left after budget:</h5>
+      <h3>R4, 138.16</h3>
+    </div>
+  </div>
+</ng-container>

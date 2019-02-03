@@ -9,10 +9,10 @@
       <ng-container *ngFor="let budget of budgetService.userBudgets | async">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>{{budget.name}}</mat-panel-title>
+            <mat-panel-title>{{budget.payload.doc.data().name}}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="budget-details">
-            <p class="budget-details-type">{{budget.duration}} budget</p>
+            <p class="budget-details-type">{{budget.payload.doc.data().duration}} budget</p>
             <div class="financial-details">
               <small>Total Income:</small>
               <small>R10,000.00</small>
@@ -21,13 +21,13 @@
               <small>Total Expenses:</small>
               <small>R5,000.00</small>
             </div>
-            <button app-button color="accent" size="md" class="open-budget">Open Budget</button>
+            <button app-button color="accent" size="md" class="open-budget" [routerLink]="'/budget/detail/' + budget.payload.doc.id">Open Budget</button>
           </div>
         </mat-expansion-panel>
       </ng-container>
     </mat-accordion>
   </div>
-  <button app-round-button color="primary" size="lg" class="add-budget" (click)="openNewBudgetDialog(newBudget)">
+  <button app-round-button color="primary" size="xlg" class="add-budget" (click)="openNewBudgetDialog(newBudget)">
     <mat-icon>add</mat-icon>
   </button>
 </ng-container>

@@ -4,6 +4,8 @@ import {MatDialogRef} from '@angular/material';
 import {BudgetService} from '../../services/budget.service';
 import {Budget} from '../../models/budget.model';
 import {UserProfile} from '../../../users/models/user-profile.model';
+import {Router} from '@angular/router';
+import {DocumentReference} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-budget',
@@ -18,6 +20,7 @@ export class AddBudgetComponent implements OnInit {
   newBudgetForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
+              private router: Router,
               public budgetService: BudgetService) {
   }
 
@@ -36,7 +39,8 @@ export class AddBudgetComponent implements OnInit {
       budget.uid = this.user.uid;
       console.log(budget);
       this.budgetService.addBudget(Object.assign({}, budget))
-        .then(() => {
+        .then((ref: DocumentReference) => {
+          this.router.navigateByUrl(`/budget/detail/${ref.id}`);
           this.closeDialog();
         });
     }
