@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, DocumentReference} from '@angular/fire/firestore';
 import {Budget} from '../models/budget.model';
 import {Observable} from 'rxjs';
 
@@ -20,5 +20,12 @@ export class BudgetService {
       'budgets',
       ref => ref.where('uid', '==', uid)
     ).valueChanges();
+  }
+
+  addBudget(budget: Budget): Promise<void | DocumentReference> {
+    return this.budgetsCollection.add(budget)
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

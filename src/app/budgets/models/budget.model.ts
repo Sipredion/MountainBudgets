@@ -1,16 +1,16 @@
 import {BudgetDuration} from './budget-duration.enum';
 
 export class Budget {
-  budgetId: string;
+  budgetType: string;
   createdOn: Date;
   duration: BudgetDuration;
-  expenses: Array<string>; // Reference to expenseIds.
-  income: Array<string>; // Reference to incomeIds.
+  expenses?: Array<string>; // Reference to expenseIds.
+  income?: Array<string>; // Reference to incomeIds.
   name: string;
   uid: string;
 
   constructor(options: any) {
-    this.budgetId = options && options.budgetId;
+    this.budgetType = options && options.budgetType;
     this.createdOn = options && options.createdOn;
     this.duration = options && options.duration;
     this.expenses = options && options.expenses || [];
