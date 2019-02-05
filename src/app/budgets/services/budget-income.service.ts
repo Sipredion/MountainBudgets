@@ -44,6 +44,13 @@ export class BudgetIncomeService {
       });
   }
 
+  updaeIncomeStream(id: string, income: IncomeStream): Promise<void | DocumentReference> {
+    return this.incomeCollection.doc(id).update(income)
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   deleteIncome(id: string): Promise<void | DocumentReference> {
     return this.incomeCollection.doc(id).delete()
       .catch(error => {

@@ -1,25 +1,35 @@
-<h3 class="add-income-title">
-  <ng-container *ngIf="income">Edit Income</ng-container>
-  <ng-container *ngIf="!income">Add Income</ng-container>
-</h3>
-<hr class="app-divider">
-<form class="add-income-form" [formGroup]="incomeStreamForm" (ngSubmit)="createNewIncomeStream(incomeStreamForm)">
-  <mat-form-field>
-    <input matInput type="text" placeholder="Name" formControlName="name">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="number" placeholder="Amount" formControlName="amount">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="text" placeholder="Type" formControlName="type">
-    <mat-icon matSuffix matTooltip="Type of Income. E.G: Salary, Loan, Business, etc">help_outline</mat-icon>
-  </mat-form-field>
-  <mat-slide-toggle>Recurring?</mat-slide-toggle>
+<form [formGroup]="incomeStreamForm" (ngSubmit)="createNewIncomeStream(incomeStreamForm)">
+  <mat-dialog-content>
+    <div class="add-income-form">
+      
+      <h3 class="add-income-title">
+        <ng-container *ngIf="income">Edit Income</ng-container>
+        <ng-container *ngIf="!income">Add Income</ng-container>
+      </h3>
+      <hr class="app-divider">
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" placeholder="Amount" formControlName="amount">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Type" formControlName="type">
+        <mat-icon matSuffix matTooltip="Type of Income. E.G: Salary, Loan, Business, etc">help_outline</mat-icon>
+      </mat-form-field>
+
+      <mat-slide-toggle>Recurring?</mat-slide-toggle>
+
+    </div>
+  </mat-dialog-content>
   <div class="form-buttons">
+    <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
     <button app-button color="primary" size="lg" type="submit">
       <ng-container *ngIf="income">Update Income</ng-container>
       <ng-container *ngIf="!income">Add Income</ng-container>
     </button>
-    <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
   </div>
 </form>

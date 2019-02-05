@@ -39,6 +39,19 @@ export class BudgetExpenseService {
 
   addExpense(expense: Expense): Promise<void | DocumentReference> {
     return this.expenseCollection.add(expense)
+      .then(ref => {
+        this.expenseCollection.doc(ref.id).update({id: ref.id})
+          .catch(error => {
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  updateExpense(id: string, expense: Expense): Promise<void | DocumentReference> {
+    return this.expenseCollection.doc(id).update(expense)
       .catch(error => {
         console.log(error);
       });

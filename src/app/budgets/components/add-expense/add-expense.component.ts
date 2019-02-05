@@ -56,8 +56,9 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
   }
 
   createNewExpense(form: FormGroup) {
+    let expense: Expense;
     if (!this.expense) {
-      const expense = new Expense(form.value);
+      expense = new Expense(form.value);
       expense.budgetId = this.budgetId;
       expense.categoryId = '';
       console.log(expense);
@@ -65,8 +66,13 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
         .then(() => {
           this.closeDialog();
         });
+    } else {
+      expense = form.value;
+      this.expenseService.updateExpense(this.expense.id, expense)
+        .then(() => {
+          this.closeDialog();
+        });
     }
-    // TODO: Write update functions for income and expenses.
   }
 
   closeDialog() {

@@ -39,7 +39,7 @@ export class BudgetListComponent implements OnInit, OnDestroy {
 
   openNewBudgetDialog(template) {
     this.dialogConfig = {
-      width: '90%'
+      width: '90%',
     };
     this.dialogRef = this.dialogService.open(template, this.dialogConfig);
   }

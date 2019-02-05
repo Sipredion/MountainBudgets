@@ -1,5 +1,5 @@
 export class Expense {
-  id?: string;
+  id: string;
   amount: number;
   budgetId: string;
   categoryId: string;
@@ -12,6 +12,7 @@ export class Expense {
   type: string;
 
   constructor(options: any) {
+    this.id = options && options.id;
     this.amount = options && options.amount;
     this.budgetId = options && options.budgetId;
     this.categoryId = options && options.categoryId;

@@ -1,5 +1,5 @@
 export class IncomeStream {
-  id?: string;
+  id: string;
   amount: number;
   budgetId: string;
   isRecurring: boolean;
@@ -7,6 +7,7 @@ export class IncomeStream {
   type: string;
 
   constructor(options: any) {
+    this.id = options && options.id;
     this.amount = options && options.amount;
     this.budgetId = options && options.budgetId;
     this.isRecurring = options && options.isRecurring;

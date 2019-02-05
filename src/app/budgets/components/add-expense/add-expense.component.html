@@ -1,36 +1,39 @@
-<h3 class="add-expense-title">Add new Expense</h3>
-<hr class="app-divider">
-<form class="add-expense-form" [formGroup]="expenseForm" (ngSubmit)="createNewExpense(expenseForm)">
+<form [formGroup]="expenseForm" (ngSubmit)="createNewExpense(expenseForm)">
+  <mat-dialog-content>
+    <div class="add-expense-form">
+      <h3 class="add-expense-title">Add new Expense</h3>
+      <hr class="app-divider">
 
-  <mat-form-field>
-    <input matInput type="text" placeholder="Name" formControlName="name">
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="number" placeholder="Amount" formControlName="amount">
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Amount" formControlName="amount">
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="text" placeholder="Category" formControlName="categoryName">
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Category" formControlName="categoryName">
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker touchUi #picker></mat-datepicker>
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="text" placeholder="Type" formControlName="type">
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Type" formControlName="type">
+      </mat-form-field>
 
-  <div class="form-toggles">
-    <mat-slide-toggle formControlName="isPaid">Already Paid?</mat-slide-toggle>
-    <mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>
-  </div>
-
+      <div class="form-toggles">
+        <mat-slide-toggle formControlName="isPaid">Already Paid?</mat-slide-toggle>
+        <mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>
+      </div>
+    </div>
+  </mat-dialog-content>
   <div class="form-buttons">
-    <button app-button color="primary" size="lg" type="submit">Add Expense</button>
     <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
+    <button app-button color="primary" size="lg" type="submit">Add Expense</button>
   </div>
 </form>

@@ -126,7 +126,7 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
     return incomeTotal - expenseTotal;
   }
 
-  deleteIncomeStream(id: string) {
+  deleteIncomeStream(id:string) {
     this.incomeService.deleteIncome(id);
   }
 

@@ -48,15 +48,21 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
   }
 
   createNewIncomeStream(form: FormGroup) {
+    let incomeStream: IncomeStream;
     if (!this.income) {
-      const incomeStream = new IncomeStream(form.value);
+      incomeStream = new IncomeStream(form.value);
       incomeStream.budgetId = this.budgetId;
       this.incomeService.addIncomeStream(Object.assign({}, incomeStream))
         .then(() => {
           this.closeDialog();
         });
+    } else {
+      incomeStream = form.value;
+      this.incomeService.updaeIncomeStream(this.income.id, incomeStream)
+        .then(() => {
+          this.closeDialog();
+        });
     }
-    // TODO: Write update functions for income and expenses.
   }
 
   closeDialog() {
