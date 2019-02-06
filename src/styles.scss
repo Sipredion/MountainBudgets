@@ -33,3 +33,9 @@ p {
 .scroll-box {
   overflow: auto;
 }
+
+.no-items-text {
+  text-align: center;
+  color: lighten(#000, 50%);
+  margin: .5rem 0;
+}

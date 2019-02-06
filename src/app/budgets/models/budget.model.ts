@@ -1,6 +1,7 @@
 import {BudgetDuration} from './budget-duration.enum';
 
 export class Budget {
+  id?: string;
   budgetType: string;
   createdOn: Date;
   duration: BudgetDuration;
@@ -10,6 +11,7 @@ export class Budget {
   uid: string;
 
   constructor(options: any) {
+    this.id = options && options.id;
     this.budgetType = options && options.budgetType;
     this.createdOn = options && options.createdOn;
     this.duration = options && options.duration;

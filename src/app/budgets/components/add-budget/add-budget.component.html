@@ -1,6 +1,8 @@
 <section class="new-budget">
   <div class="new-budget-title">
-    <h4 class="title">Add a new Budget</h4>
+    <h4 class="title">
+      <ng-container [ngTemplateOutlet]="text"></ng-container>
+    </h4>
   </div>
   <hr class="app-divider">
   <form [formGroup]="newBudgetForm" (ngSubmit)="createNewBudget(newBudgetForm)" class="new-budget-form">
@@ -27,7 +29,14 @@
       </select>
     </mat-form-field>
 
-    <button app-button color="primary" size="md" class="create-button" type="submit">Create Budget</button>
+    <button app-button color="primary" size="md" class="create-button" type="submit">
+      <ng-container [ngTemplateOutlet]="text"></ng-container>
+    </button>
     <button app-button color="warn" size="sm" class="cancel-button" type="button" (click)="closeDialog()">cancel</button>
   </form>
 </section>
+
+<ng-template #text>
+  <ng-container *ngIf="budget">Update Budget</ng-container>
+  <ng-container *ngIf="!budget">Add Budget</ng-container>
+</ng-template>

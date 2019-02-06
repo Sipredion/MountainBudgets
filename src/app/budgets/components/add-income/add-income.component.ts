@@ -52,6 +52,7 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
     if (!this.income) {
       incomeStream = new IncomeStream(form.value);
       incomeStream.budgetId = this.budgetId;
+      incomeStream.id = '';
       this.incomeService.addIncomeStream(Object.assign({}, incomeStream))
         .then(() => {
           this.closeDialog();

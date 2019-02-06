@@ -16,6 +16,7 @@ export class AddBudgetComponent implements OnInit {
 
   @Input() user: UserProfile;
   @Input() dialogRef: MatDialogRef<any>;
+  @Input() budget?: Budget;
 
   newBudgetForm: FormGroup;
 
@@ -25,23 +26,45 @@ export class AddBudgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newBudgetForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      budgetType: ['', Validators.required],
-      duration: ['', Validators.required]
-    });
+    if (this.budget) {
+      this.newBudgetForm = this.formBuilder.group({
+        name: [this.budget.name, Validators.required],
+        budgetType: [this.budget.budgetType, Validators.required],
+        duration: [this.budget.duration, Validators.required]
+      });
+    } else {
+      this.newBudgetForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        budgetType: ['', Validators.required],
+        duration: ['', Validators.required]
+      });
+    }
   }
 
   createNewBudget(form: FormGroup) {
-    if (!form.hasError('required')) {
-      const budget = new Budget(form.value);
-      budget.createdOn = new Date();
-      budget.uid = this.user.uid;
-      this.budgetService.addBudget(Object.assign({}, budget))
-        .then((ref: DocumentReference) => {
-          this.router.navigateByUrl(`/budget/detail/${ref.id}`);
-          this.closeDialog();
-        });
+    if (this.budget) {
+      if (!form.hasError('required')) {
+        this.budgetService.updateBudget(this.budget.id, Object.assign({}, form.value))
+          .then(() => {
+            this.closeDialog();
+          });
+      }
+    } else {
+      if (!form.hasError('required')) {
+        const budget = new Budget(form.value);
+        budget.createdOn = new Date();
+        budget.uid = this.user.uid;
+        budget.id = '';
+        this.budgetService.addBudget(Object.assign({}, budget))
+          .then((ref: DocumentReference) => {
+            budget.id = ref.id;
+            this.budgetService.updateBudget(budget.id, budget)
+              .then(() => {
+                this.router.navigateByUrl(`/budget/detail/${ref.id}`);
+                this.closeDialog();
+              });
+          });
+      }
     }
   }
 

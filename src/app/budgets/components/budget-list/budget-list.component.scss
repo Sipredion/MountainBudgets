@@ -1,3 +1,5 @@
+@import "../../../../styles/partials/variables";
+
 .flex-right {
   display: flex;
   justify-content: flex-end;
@@ -26,12 +28,21 @@
 }
 
 .delete-budget {
+  color: rgba($warn, 0.7);
   margin: .75rem auto;
-  width: 45%;
+}
+
+.edit-budget {
+  color: rgba($primary, 0.7);
+  margin: .75rem auto;
 }
 
 .add-budget {
   position: absolute;
   bottom: 1.3rem;
   right: 1.3rem;
+}
+
+.mat-expansion-panel-header-title {
+  align-items: center;
 }

@@ -1,7 +1,9 @@
 <form [formGroup]="expenseForm" (ngSubmit)="createNewExpense(expenseForm)">
   <mat-dialog-content>
     <div class="add-expense-form">
-      <h3 class="add-expense-title">Add new Expense</h3>
+      <h3 class="add-expense-title">
+        <ng-container [ngTemplateOutlet]="text"></ng-container>
+      </h3>
       <hr class="app-divider">
 
       <mat-form-field>
@@ -34,6 +36,13 @@
   </mat-dialog-content>
   <div class="form-buttons">
     <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
-    <button app-button color="primary" size="lg" type="submit">Add Expense</button>
+    <button app-button color="primary" size="lg" type="submit">
+      <ng-container [ngTemplateOutlet]="text"></ng-container>
+    </button>
   </div>
 </form>
+
+<ng-template #text>
+  <ng-container *ngIf="expense">Update Expense</ng-container>
+  <ng-container *ngIf="!expense">Add Expense</ng-container>
+</ng-template>

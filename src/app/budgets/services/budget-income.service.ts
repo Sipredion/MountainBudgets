@@ -26,9 +26,13 @@ export class BudgetIncomeService {
       )
     ).snapshotChanges().pipe(
       tap(incomeStreams => {
-        const incomeStreamAmounts = incomeStreams.map(stream => stream.payload.doc.data().amount);
-        const incomeStreamTotal = this.reduceArray(incomeStreamAmounts);
-        this.budgetIncomeTotalSrc.next(incomeStreamTotal);
+        if (incomeStreams) {
+          const incomeStreamAmounts = incomeStreams.map(stream => stream.payload.doc.data().amount);
+          const incomeStreamTotal = this.reduceArray(incomeStreamAmounts);
+          this.budgetIncomeTotalSrc.next(incomeStreamTotal);
+        } else {
+          this.budgetIncomeTotalSrc.next(0);
+        }
       }),
       catchError(err => {
         console.log(err);
@@ -60,7 +64,11 @@ export class BudgetIncomeService {
 
   reduceArray(array: Array<number>): number {
     // TODO: Create service to store app-wide helper functions
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    return array.reduce(reducer);
+    if (array.length) {
+      const reducer = (accumulator, currentValue) => accumulator + currentValue;
+      return array.reduce(reducer);
+    } else {
+      return 0;
+    }
   }
 }

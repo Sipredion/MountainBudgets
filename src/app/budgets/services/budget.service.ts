@@ -34,6 +34,13 @@ export class BudgetService {
       });
   }
 
+  updateBudget(id: string, budget: Budget) {
+    return this.budgetsCollection.doc(id).update(Object.assign({}, budget))
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   deleteBudget(id: string): Promise<void | DocumentReference> {
     return this.budgetsCollection.doc(id).delete()
       .catch(error => {

@@ -1,10 +1,9 @@
 <form [formGroup]="incomeStreamForm" (ngSubmit)="createNewIncomeStream(incomeStreamForm)">
   <mat-dialog-content>
     <div class="add-income-form">
-      
+
       <h3 class="add-income-title">
-        <ng-container *ngIf="income">Edit Income</ng-container>
-        <ng-container *ngIf="!income">Add Income</ng-container>
+        <ng-container [ngTemplateOutlet]="text"></ng-container>
       </h3>
       <hr class="app-divider">
 
@@ -28,8 +27,12 @@
   <div class="form-buttons">
     <button app-button color="warn" size="md" type="button" (click)="closeDialog()">Cancel</button>
     <button app-button color="primary" size="lg" type="submit">
-      <ng-container *ngIf="income">Update Income</ng-container>
-      <ng-container *ngIf="!income">Add Income</ng-container>
+      <ng-container [ngTemplateOutlet]="text"></ng-container>
     </button>
   </div>
 </form>
+
+<ng-template #text>
+  <ng-container *ngIf="income">Update Income</ng-container>
+  <ng-container *ngIf="!income">Add Income</ng-container>
+</ng-template>

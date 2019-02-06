@@ -68,43 +68,51 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
 
   fetchAllIncomeForBudget(budgetId: string) {
     this.incomeStreamSubscription = this.incomeService.getAllIncomeStreamsByBudget(budgetId).subscribe(incomeStreams => {
-      this.budgetIncomeStreams = incomeStreams.map(incomeStream =>
-        new IncomeStream({
-          id: incomeStream.payload.doc.id,
-          amount: incomeStream.payload.doc.data().amount,
-          budgetId: incomeStream.payload.doc.data().budgetId,
-          isRecurring: incomeStream.payload.doc.data().isRecurring,
-          name: incomeStream.payload.doc.data().name,
-          type: incomeStream.payload.doc.data().type,
-        })
-      );
-      this.incomeTotalSubscription = this.incomeService.budgetIncomeTotal.subscribe(incomeTotal => {
-        this.budgetIncomeTotal = incomeTotal;
-        this.totalBudgetRemaining = this.deriveBudgetAmountRemaining(this.budgetIncomeTotal, this.budgetExpenseTotal);
-      });
+      if (incomeStreams) {
+        this.budgetIncomeStreams = incomeStreams.map(incomeStream =>
+          new IncomeStream({
+            id: incomeStream.payload.doc.id,
+            amount: incomeStream.payload.doc.data().amount,
+            budgetId: incomeStream.payload.doc.data().budgetId,
+            isRecurring: incomeStream.payload.doc.data().isRecurring,
+            name: incomeStream.payload.doc.data().name,
+            type: incomeStream.payload.doc.data().type,
+          })
+        );
+        this.incomeTotalSubscription = this.incomeService.budgetIncomeTotal.subscribe(incomeTotal => {
+          this.budgetIncomeTotal = incomeTotal;
+          this.totalBudgetRemaining = this.deriveBudgetAmountRemaining(this.budgetIncomeTotal, this.budgetExpenseTotal);
+        });
+      } else {
+        this.budgetIncomeTotal = 0;
+      }
     });
   }
 
   fetchAllExpenseForBudget(budgetId: string) {
     this.expenseSubscription = this.expenseService.getAllExpensesByBudget(budgetId).subscribe(expenses => {
-      this.budgetExpenses = expenses.map(expense =>
-        new Expense({
-          id: expense.payload.doc.id,
-          amount: expense.payload.doc.data().amount,
-          budgetId: expense.payload.doc.data().budgetId,
-          categoryName: expense.payload.doc.data().categoryName,
-          dueDate: expense.payload.doc.data().dueDate,
-          isAutomatic: expense.payload.doc.data().isAutomatic,
-          isPaid: expense.payload.doc.data().isPaid,
-          isRecurring: expense.payload.doc.data().isRecurring,
-          name: expense.payload.doc.data().name,
-          type: expense.payload.doc.data().type
-        })
-      );
-      this.expenseTotalSubscription = this.expenseService.budgetExpenseTotal.subscribe(expenseTotal => {
-        this.budgetExpenseTotal = expenseTotal;
-        this.totalBudgetRemaining = this.deriveBudgetAmountRemaining(this.budgetIncomeTotal, this.budgetExpenseTotal);
-      });
+      if (expenses) {
+        this.budgetExpenses = expenses.map(expense =>
+          new Expense({
+            id: expense.payload.doc.id,
+            amount: expense.payload.doc.data().amount,
+            budgetId: expense.payload.doc.data().budgetId,
+            categoryName: expense.payload.doc.data().categoryName,
+            dueDate: expense.payload.doc.data().dueDate,
+            isAutomatic: expense.payload.doc.data().isAutomatic,
+            isPaid: expense.payload.doc.data().isPaid,
+            isRecurring: expense.payload.doc.data().isRecurring,
+            name: expense.payload.doc.data().name,
+            type: expense.payload.doc.data().type
+          })
+        );
+        this.expenseTotalSubscription = this.expenseService.budgetExpenseTotal.subscribe(expenseTotal => {
+          this.budgetExpenseTotal = expenseTotal;
+          this.totalBudgetRemaining = this.deriveBudgetAmountRemaining(this.budgetIncomeTotal, this.budgetExpenseTotal);
+        });
+      } else {
+        this.budgetExpenseTotal = 0;
+      }
     });
   }
 
@@ -126,7 +134,7 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
     return incomeTotal - expenseTotal;
   }
 
-  deleteIncomeStream(id:string) {
+  deleteIncomeStream(id: string) {
     this.incomeService.deleteIncome(id);
   }
 

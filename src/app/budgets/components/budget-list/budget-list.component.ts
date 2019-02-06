@@ -19,6 +19,8 @@ export class BudgetListComponent implements OnInit, OnDestroy {
   dialogRef: MatDialogRef<any>;
   dialogConfig: MatDialogConfig;
 
+  selecedBudget: Budget;
+
   constructor(public authService: UserAuthService,
               public budgetService: BudgetService,
               private dialogService: MatDialog) {
@@ -37,10 +39,13 @@ export class BudgetListComponent implements OnInit, OnDestroy {
     this.usrSubscription.unsubscribe();
   }
 
-  openNewBudgetDialog(template) {
+  openBudgetDialog(template, data?: Budget) {
     this.dialogConfig = {
       width: '90%',
     };
+    if (data) {
+      this.selecedBudget = data;
+    }
     this.dialogRef = this.dialogService.open(template, this.dialogConfig);
   }
 
