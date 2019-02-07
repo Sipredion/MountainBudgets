@@ -1,0 +1,86 @@
+@import "../../../../styles/partials/variables";
+
+.profile-page {
+  position: relative;
+}
+
+.profile-trigger {
+  border: none;
+  width: 5.8rem;
+  height: 5.8rem;
+  margin: 1rem 0;
+  border-radius: 1000px;
+  box-shadow: 0 2px 4px rgba($dark, .68), 0 0 1px rgba($dark, .4);
+  background: url('../../../../assets/images/icons/user_male.png') no-repeat center #fff;
+  background-size: cover;
+  &:active {
+    box-shadow: inset 0 2px 4px rgba($dark, .68), 0 0 1px rgba($dark, .4);
+  }
+}
+
+.close-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.profile-content {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: -110vh;
+  left: -1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+  transition: all .3s linear;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  z-index: 99;
+}
+
+.active {
+  pointer-events: all;
+  top: -.6rem;
+}
+
+.mat-toolbar {
+  justify-content: space-around;
+}
+
+.profile-button {
+  //width: 40%;
+  z-index: 9;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 3.4rem;
+}
+
+.app-navigation {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-item {
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
+
+.link {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.active-tab {
+  color: darken(rgb(32,94,119), 10%);
+  border-bottom: 2px solid darken(rgb(32,94,119), 10%);
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}

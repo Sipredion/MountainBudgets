@@ -1,0 +1,24 @@
+.mat-toolbar {
+  justify-content: space-around;
+}
+
+.profile-button {
+  width: 40%;
+  z-index: 9;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 3.4rem;
+}
+
+.app-navigation {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-item {
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
