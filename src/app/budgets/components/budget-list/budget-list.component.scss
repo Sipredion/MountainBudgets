@@ -1,5 +1,9 @@
 @import "../../../../styles/partials/variables";
 
+h4 {
+  margin: .3rem;
+}
+
 .flex-right {
   display: flex;
   justify-content: flex-end;
@@ -7,6 +11,13 @@
 
 .budget-list {
   margin: .75rem;
+}
+
+.single-budget {
+  margin: .75rem 0;
+  box-shadow: 0 2px 3px rgba($dark, 0.14), 0 0 0 1px rgba($dark, 0.14);
+  padding: .3rem .5rem;
+  border-radius: 6px;
 }
 
 .budget-details {
@@ -23,8 +34,7 @@
 }
 
 .open-budget {
-  margin: .75rem auto;
-  width: 65%;
+  margin: .35rem auto;
 }
 
 .delete-budget {
@@ -43,13 +53,9 @@
   right: 1.3rem;
 }
 
-.mat-expansion-panel-header-title {
-  align-items: center;
-}
-
 .touch-menu-trigger {
   font-size: 16px;
-  margin: .2rem;
+  margin: .2rem 0 0 4.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,4 +74,25 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.sections {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left-section {
+  width: 33%;
+  text-align: left;
+}
+
+.middle-section {
+  width: 33%;
+  text-align: center;
+}
+
+.right-section {
+  width: 33%;
+  text-align: right;
 }

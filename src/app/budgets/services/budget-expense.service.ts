@@ -20,6 +20,7 @@ export class BudgetExpenseService {
   }
 
   getAllExpensesByBudget(budgetId: string): Observable<DocumentChangeAction<Expense>[]> {
+    console.log(budgetId);
     return this.expenseList = this.data.collection<Expense>(
       'Expenses',
       ref => ref.where('budgetId', '==', budgetId

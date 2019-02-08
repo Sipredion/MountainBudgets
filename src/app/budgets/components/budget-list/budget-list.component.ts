@@ -5,6 +5,9 @@ import {BudgetService} from '../../services/budget.service';
 import {Subscription} from 'rxjs';
 import {UserProfile} from '../../../users/models/user-profile.model';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {BudgetIncomeService} from '../../services/budget-income.service';
+import {BudgetExpenseService} from '../../services/budget-expense.service';
+import {DocumentChangeAction} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-budget-list',
@@ -14,15 +17,20 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 export class BudgetListComponent implements OnInit, OnDestroy {
 
   usrSubscription: Subscription;
+  budgetSubscription: Subscription;
+
   user: UserProfile;
+  budgets: Array<DocumentChangeAction<Budget>> = [];
 
   dialogRef: MatDialogRef<any>;
   dialogConfig: MatDialogConfig;
 
-  selecedBudget: Budget;
+  selectedBudget: Budget;
 
   constructor(public authService: UserAuthService,
               public budgetService: BudgetService,
+              public incomeService: BudgetIncomeService,
+              public expenseService: BudgetExpenseService,
               private dialogService: MatDialog) {
   }
 
@@ -31,6 +39,13 @@ export class BudgetListComponent implements OnInit, OnDestroy {
       if (user) {
         this.user = user;
         this.budgetService.getAllBudgetsByUser(this.user.uid);
+        this.budgetSubscription = this.budgetService.userBudgets.subscribe(budgets => {
+          this.budgets = budgets;
+          // this.budgets.forEach(budget => {
+          //   this.incomeService.getAllIncomeStreamsByBudget(budget.payload.doc.data().id).subscribe();
+          //   this.expenseService.getAllExpensesByBudget(budget.payload.doc.data().id).subscribe();
+          // });
+        });
       }
     });
   }
@@ -44,7 +59,7 @@ export class BudgetListComponent implements OnInit, OnDestroy {
       width: '90%',
     };
     if (data) {
-      this.selecedBudget = data;
+      this.selectedBudget = data;
     }
     this.dialogRef = this.dialogService.open(template, this.dialogConfig);
   }
