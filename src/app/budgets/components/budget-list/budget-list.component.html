@@ -5,28 +5,94 @@
     </div>
   </mat-card>
   <div class="budget-list">
-    <ng-container *ngFor="let budget of budgets">
-      <div class="single-budget">
-        <div class="sections">
-          <div class="left-section">
-            <h4>{{budget.payload.doc.data().name}}</h4>
-          </div>
-          <div class="middle-section">
-            <mat-menu #budgetMenu="matMenu">
-              <button mat-menu-item (click)="deleteBudget(budget.payload.doc.id)">Delete Budget</button>
-              <button mat-menu-item (click)="openBudgetDialog(newBudget, budget.payload.doc.data())">Edit Budget
-              </button>
-            </mat-menu>
-            <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-          </div>
-          <div class="right-section">
-            <button app-button color="accent" size="md" class="open-budget"
-                    [routerLink]="'/budget/detail/' + budget.payload.doc.id">Open Budget
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-container>
+    <mat-accordion>
+      <ng-container *ngIf="budgetService.personalBudgets | async as personalBudgets">
+        <mat-expansion-panel *ngIf="personalBudgets.length > 0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Personal Budgets</mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-container *ngFor="let personal of personalBudgets">
+            <div class="single-budget">
+              <div class="sections">
+                <div class="left-section">
+                  <h4>{{personal.payload.doc.data().name}}</h4>
+                </div>
+                <div class="middle-section">
+                  <mat-menu #budgetMenu="matMenu">
+                    <button mat-menu-item (click)="deleteBudget(personal.payload.doc.id)">Delete Budget</button>
+                    <button mat-menu-item (click)="openBudgetDialog(newBudget, personal.payload.doc.data())">Edit Budget
+                    </button>
+                  </mat-menu>
+                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
+                </div>
+                <div class="right-section">
+                  <button app-button color="accent" size="md" class="open-budget"
+                          [routerLink]="'/budget/detail/' + personal.payload.doc.id">Open Budget
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </mat-expansion-panel>
+      </ng-container>
+
+      <ng-container *ngIf="budgetService.houseHoldBudgets | async as houseBudgets">
+        <mat-expansion-panel *ngIf="houseBudgets.length > 0">
+          <mat-expansion-panel-header>HouseHold Budgets</mat-expansion-panel-header>
+          <ng-container *ngFor="let household of houseBudgets">
+            <div class="single-budget">
+              <div class="sections">
+                <div class="left-section">
+                  <h4>{{household.payload.doc.data().name}}</h4>
+                </div>
+                <div class="middle-section">
+                  <mat-menu #budgetMenu="matMenu">
+                    <button mat-menu-item (click)="deleteBudget(household.payload.doc.id)">Delete Budget</button>
+                    <button mat-menu-item (click)="openBudgetDialog(newBudget, household.payload.doc.data())">Edit
+                      Budget
+                    </button>
+                  </mat-menu>
+                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
+                </div>
+                <div class="right-section">
+                  <button app-button color="accent" size="md" class="open-budget"
+                          [routerLink]="'/budget/detail/' + household.payload.doc.id">Open Budget
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </mat-expansion-panel>
+      </ng-container>
+
+      <ng-container *ngIf="budgetService.businessBudgets | async as businessBudgets">
+        <mat-expansion-panel *ngIf="businessBudgets.length > 0">
+          <mat-expansion-panel-header>Business Budgets</mat-expansion-panel-header>
+          <ng-container *ngFor="let business of businessBudgets">
+            <div class="single-budget">
+              <div class="sections">
+                <div class="left-section">
+                  <h4>{{business.payload.doc.data().name}}</h4>
+                </div>
+                <div class="middle-section">
+                  <mat-menu #budgetMenu="matMenu">
+                    <button mat-menu-item (click)="deleteBudget(business.payload.doc.id)">Delete Budget</button>
+                    <button mat-menu-item (click)="openBudgetDialog(newBudget, business.payload.doc.data())">Edit Budget
+                    </button>
+                  </mat-menu>
+                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
+                </div>
+                <div class="right-section">
+                  <button app-button color="accent" size="md" class="open-budget"
+                          [routerLink]="'/budget/detail/' + business.payload.doc.id">Open Budget
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
   </div>
   <button app-round-button color="primary" size="xlg" class="add-budget" (click)="openBudgetDialog(newBudget)">
     <mat-icon>add</mat-icon>

@@ -29,8 +29,6 @@ export class BudgetListComponent implements OnInit, OnDestroy {
 
   constructor(public authService: UserAuthService,
               public budgetService: BudgetService,
-              public incomeService: BudgetIncomeService,
-              public expenseService: BudgetExpenseService,
               private dialogService: MatDialog) {
   }
 
@@ -41,10 +39,6 @@ export class BudgetListComponent implements OnInit, OnDestroy {
         this.budgetService.getAllBudgetsByUser(this.user.uid);
         this.budgetSubscription = this.budgetService.userBudgets.subscribe(budgets => {
           this.budgets = budgets;
-          // this.budgets.forEach(budget => {
-          //   this.incomeService.getAllIncomeStreamsByBudget(budget.payload.doc.data().id).subscribe();
-          //   this.expenseService.getAllExpensesByBudget(budget.payload.doc.data().id).subscribe();
-          // });
         });
       }
     });
