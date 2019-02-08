@@ -46,3 +46,26 @@
 .mat-expansion-panel-header-title {
   align-items: center;
 }
+
+.touch-menu-trigger {
+  font-size: 16px;
+  margin: .2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-budget-menu {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
