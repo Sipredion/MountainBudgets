@@ -18,10 +18,10 @@ export class AppButtonDirective implements OnInit {
               private renderer: Renderer2) {
   }
 
-  @HostListener('focus')
-  focus() {
-    this.onElementFocus();
-  }
+  // @HostListener('focus')
+  // focus() {
+  //   this.onElementFocus();
+  // }
 
   @HostListener('touchstart')
   tap() {
@@ -43,10 +43,10 @@ export class AppButtonDirective implements OnInit {
     this.onMouseClick();
   }
 
-  @HostListener('focusout')
-  focusOut() {
-    this.unFocusButton();
-  }
+  // @HostListener('focusout')
+  // focusOut() {
+  //   this.unFocusButton();
+  // }
 
   @HostListener('keyup.enter')
   handleEnterClickReset() {
