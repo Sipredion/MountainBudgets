@@ -12,20 +12,19 @@
             <mat-panel-title>Personal Budgets</mat-panel-title>
           </mat-expansion-panel-header>
           <ng-container *ngFor="let personal of personalBudgets">
-            <div app-button color="primary" class="single-budget" (click)="openBudget(personal.payload.doc.id)">
-              <div class="sections">
-                <div class="left-section">
-                  <h4>{{personal.payload.doc.data().name}}</h4>
-                </div>
-                <div class="middle-section">
-                  <mat-menu #budgetMenu="matMenu">
-                    <button mat-menu-item (click)="deleteBudget(personal.payload.doc.id)">Delete Budget</button>
-                    <button mat-menu-item (click)="openBudgetDialog(newBudget, personal.payload.doc.data())">Edit Budget
-                    </button>
-                  </mat-menu>
-                  <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-                </div>
+            <div class="budget-wrapper">
+              <div app-button color="primary" class="single-budget" (click)="openBudget(personal.payload.doc.id)">
+                <h4>{{personal.payload.doc.data().name}}</h4>
               </div>
+              <mat-menu #budgetMenu="matMenu">
+                <button mat-menu-item (click)="deleteBudget(personal.payload.doc.id)">Delete Budget</button>
+                <button mat-menu-item (click)="openBudgetDialog(newBudget, personal.payload.doc.data())">Edit
+                  Budget
+                </button>
+              </mat-menu>
+              <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">
+                more_vert
+              </mat-icon>
             </div>
           </ng-container>
         </mat-expansion-panel>
@@ -35,21 +34,19 @@
         <mat-expansion-panel *ngIf="houseBudgets.length > 0">
           <mat-expansion-panel-header>HouseHold Budgets</mat-expansion-panel-header>
           <ng-container *ngFor="let household of houseBudgets">
-            <div app-button color="accent" class="single-budget" (click)="openBudget(household.payload.doc.id)">
-              <div class="sections">
-                <div class="left-section">
-                  <h4>{{household.payload.doc.data().name}}</h4>
-                </div>
-                <div class="middle-section">
-                  <mat-menu #budgetMenu="matMenu">
-                    <button mat-menu-item (click)="deleteBudget(household.payload.doc.id)">Delete Budget</button>
-                    <button mat-menu-item (click)="openBudgetDialog(newBudget, household.payload.doc.data())">Edit
-                      Budget
-                    </button>
-                  </mat-menu>
-                  <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-                </div>
+            <div class="budget-wrapper">
+              <div app-button color="accent" class="single-budget" (click)="openBudget(household.payload.doc.id)">
+                <h4>{{household.payload.doc.data().name}}</h4>
               </div>
+              <mat-menu #budgetMenu="matMenu">
+                <button mat-menu-item (click)="deleteBudget(household.payload.doc.id)">Delete Budget</button>
+                <button mat-menu-item (click)="openBudgetDialog(newBudget, household.payload.doc.data())">Edit
+                  Budget
+                </button>
+              </mat-menu>
+              <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">
+                more_vert
+              </mat-icon>
             </div>
           </ng-container>
         </mat-expansion-panel>
@@ -59,20 +56,19 @@
         <mat-expansion-panel *ngIf="businessBudgets.length > 0">
           <mat-expansion-panel-header>Business Budgets</mat-expansion-panel-header>
           <ng-container *ngFor="let business of businessBudgets">
-            <div app-button color="warn" class="single-budget" role="button">
-              <div class="sections">
-                <div class="left-section">
-                  <h4>{{business.payload.doc.data().name}}</h4>
-                </div>
-                <div class="middle-section" (click)="openBudget(business.payload.doc.id)">
-                  <mat-menu #budgetMenu="matMenu">
-                    <button mat-menu-item (click)="deleteBudget(business.payload.doc.id)">Delete Budget</button>
-                    <button mat-menu-item (click)="openBudgetDialog(newBudget, business.payload.doc.data())">Edit Budget
-                    </button>
-                  </mat-menu>
-                  <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-                </div>
+            <div class="budget-wrapper">
+              <div app-button color="warn" class="single-budget" role="button">
+                <h4>{{business.payload.doc.data().name}}</h4>
               </div>
+              <mat-menu #budgetMenu="matMenu">
+                <button mat-menu-item (click)="deleteBudget(business.payload.doc.id)">Delete Budget</button>
+                <button mat-menu-item (click)="openBudgetDialog(newBudget, business.payload.doc.data())">Edit
+                  Budget
+                </button>
+              </mat-menu>
+              <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()"
+                        [matMenuTriggerFor]="budgetMenu">more_vert
+              </mat-icon>
             </div>
           </ng-container>
         </mat-expansion-panel>

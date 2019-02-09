@@ -1,9 +1,16 @@
-<mat-card>
-  <mat-card-content>
-    <div class="buttons">
-      <button app-button [color]="'primary'">Primary Button</button>
-      <button app-button [color]="'accent'">Accent Button</button>
-      <button app-button [color]="'warn'">Warn Button</button>
-    </div>
-  </mat-card-content>
-</mat-card>
+<section class="dashboard">
+  <mat-card>
+    <mat-card-content>
+      <div class="buttons">
+        <button app-button [color]="'primary'">Primary Button</button>
+        <button app-button [color]="'accent'">Accent Button</button>
+        <button app-button [color]="'warn'">Warn Button</button>
+      </div>
+      <div class="buttons">
+        <button app-round-button [color]="'primary'"><mat-icon>add</mat-icon></button>
+        <button app-round-button [color]="'accent'"><mat-icon>add</mat-icon></button>
+        <button app-round-button [color]="'warn'"><mat-icon>add</mat-icon></button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

@@ -13,8 +13,14 @@ h4 {
   margin: .75rem;
 }
 
+.budget-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .single-budget {
   margin: .75rem 0;
+  width: 100%;
 }
 
 .budget-details {
@@ -52,7 +58,7 @@ h4 {
 
 .touch-menu-trigger {
   font-size: 16px;
-  margin: .2rem 0 0 4.5rem;
+  margin: .2rem -1rem 0 .5rem;
   display: flex;
   justify-content: center;
   align-items: center;

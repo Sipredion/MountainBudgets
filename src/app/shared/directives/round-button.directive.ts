@@ -23,6 +23,11 @@ export class RoundButtonDirective implements OnInit {
     this.onElementFocus();
   }
 
+  @HostListener('touchstart')
+  tap() {
+    this.onMouseClick();
+  }
+
   @HostListener('mousedown')
   click() {
     this.onMouseClick();
@@ -33,11 +38,6 @@ export class RoundButtonDirective implements OnInit {
     this.onMouseClickReset();
   }
 
-  @HostListener('mouseover')
-  hover() {
-    this.onMouseHover();
-  }
-
   @HostListener('keydown.enter')
   Enter() {
     this.onMouseClick();
@@ -46,11 +46,6 @@ export class RoundButtonDirective implements OnInit {
   @HostListener('focusout')
   focusOut() {
     this.unFocusButton();
-  }
-
-  @HostListener('mouseleave')
-  handleMouseUp() {
-    this.onMouseHoverReset();
   }
 
   @HostListener('keyup.enter')
@@ -65,8 +60,8 @@ export class RoundButtonDirective implements OnInit {
   onElementFocus() {
     this.renderer.setStyle(
       this.el.nativeElement,
-      'box-shadow',
-      `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.53)`
+      'background-color',
+      `rgba(${this.roundButtonColor}, 0.2)`
     );
     this.renderer.setStyle(this.el.nativeElement, 'color', `rgb(${this.roundButtonFocusColor})`);
   }
@@ -75,7 +70,7 @@ export class RoundButtonDirective implements OnInit {
     this.renderer.setStyle(
       this.el.nativeElement,
       'box-shadow',
-      `0 2px 12px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`
+      `inset 0 2px 4px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`
     );
   }
 
@@ -83,44 +78,20 @@ export class RoundButtonDirective implements OnInit {
     this.renderer.setStyle(
       this.el.nativeElement,
       'box-shadow',
-      `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.53)`
-    );
-  }
-
-  onMouseHover() {
-    this.renderer.setStyle(
-      this.el.nativeElement,
-      'background-color',
-      `rgba(${this.roundButtonColor}, 0.2)`
-    );
-  }
-
-  onMouseHoverReset() {
-    this.renderer.setStyle(
-      this.el.nativeElement,
-      'background-color',
-      `rgba(${this.roundButtonColor}, 0)`
+      `0 2px 4px rgba(${this.roundButtonFocusColor}, 0.8), 0 0 1px rgba(${this.roundButtonFocusColor}, 0.4)`
     );
   }
 
   unFocusButton() {
     this.renderer.setStyle(
       this.el.nativeElement,
-      'box-shadow',
-      `0 2px 4px rgba(${this.roundButtonColor}, 0.5), 0 0 1px rgba(${this.roundButtonColor}, 0.13)`
+      'background-color',
+      `rgba(${this.roundButtonColor}, 0)`
     );
     this.renderer.setStyle(
       this.el.nativeElement,
       'color',
       `rgb(${this.roundButtonColor})`
-    );
-  }
-
-  resetStyle() {
-    this.renderer.setStyle(
-      this.el.nativeElement,
-      'box-shadow',
-      `0 2px 12px rgba(${this.roundButtonColor}, 0.8), 0 0 1px rgba(${this.roundButtonColor}, 0.5)`
     );
   }
 

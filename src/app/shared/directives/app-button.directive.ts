@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[app-button]'
@@ -14,9 +14,18 @@ export class AppButtonDirective implements OnInit {
   buttonPadding: string;
   textSize: string;
 
+  constructor(private el: ElementRef,
+              private renderer: Renderer2) {
+  }
+
   @HostListener('focus')
   focus() {
     this.onElementFocus();
+  }
+
+  @HostListener('touchstart')
+  tap() {
+    this.onMouseClick();
   }
 
   @HostListener('mousedown')
@@ -29,11 +38,6 @@ export class AppButtonDirective implements OnInit {
     this.onMouseClickReset();
   }
 
-  @HostListener('mouseover')
-  hover() {
-    this.onMouseHover();
-  }
-
   @HostListener('keydown.enter')
   Enter() {
     this.onMouseClick();
@@ -44,37 +48,55 @@ export class AppButtonDirective implements OnInit {
     this.unFocusButton();
   }
 
-  @HostListener('mouseleave')
-  handleMouseUp() {
-    this.onMouseHoverReset();
-  }
-
   @HostListener('keyup.enter')
   handleEnterClickReset() {
     this.onMouseClickReset();
-  }
-
-  constructor(private el: ElementRef) {
   }
 
   ngOnInit() {
     this.setInitialStyle();
   }
 
+  onElementFocus() {
+    this.el.nativeElement.style.backgroundColor = `rgba(${this.buttonFocusColor}, 0.2)`;
+    this.el.nativeElement.style.color = `rgb(${this.buttonFocusColor})`;
+  }
+
+  onMouseClick() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `inset 0 2px 4px rgba(${this.buttonColor}, 0.8), 0 0 1px rgba(${this.buttonColor}, 0.5)`
+    );
+  }
+
+  onMouseClickReset() {
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'box-shadow',
+      `0 2px 4px rgba(${this.buttonColor}, 0.5), 0 0 1px rgba(${this.buttonColor}, 0.13)`
+    );
+  }
+
+  unFocusButton() {
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', `rgba(${this.buttonColor}, 0)`);
+    this.renderer.setStyle(this.el.nativeElement, 'color', `rgb(${this.buttonColor})`);
+  }
+
   setInitialStyle() {
     this.setButtonColor();
     this.setButtonSize();
     // Set initial style
-    // TODO: Add renderer for security purposes.
-    this.el.nativeElement.style.border = 0;
-    this.el.nativeElement.style.borderRadius = '4px';
-    this.el.nativeElement.style.backgroundColor = 'transparent';
-    this.el.nativeElement.style.padding = this.buttonPadding;
-    this.el.nativeElement.style.fontSize = this.textSize;
-    this.el.nativeElement.style.cursor = 'pointer';
-    this.el.nativeElement.style.outline = `none`;
-    this.el.nativeElement.style.color = `rgb(${this.buttonColor})`;
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.buttonColor}, 0.5), 0 0 1px rgba(${this.buttonColor}, 0.13)`;
+    const el = this.el.nativeElement;
+    this.renderer.addClass(el, 'app-button-initial');
+    this.renderer.setStyle(el, 'padding', this.buttonPadding);
+    this.renderer.setStyle(el, 'font-size', this.textSize || '13px');
+    this.renderer.setStyle(el, 'color', `rgb(${this.buttonColor})`);
+    this.renderer.setStyle(
+      el,
+      'box-shadow',
+      `0 2px 4px rgba(${this.buttonColor}, 0.5), 0 0 1px rgba(${this.buttonColor}, 0.13)`
+    );
   }
 
   setButtonColor() {
@@ -121,36 +143,6 @@ export class AppButtonDirective implements OnInit {
         this.textSize = '13px';
         break;
     }
-  }
-
-  onElementFocus() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.buttonFocusColor}, 0.8), 0 0 1px rgba(${this.buttonFocusColor}, 0.53)`;
-    this.el.nativeElement.style.color = `rgb(${this.buttonFocusColor})`;
-  }
-
-  onMouseClick() {
-    this.el.nativeElement.style.boxShadow = `0 2px 12px rgba(${this.buttonColor}, 0.8), 0 0 1px rgba(${this.buttonColor}, 0.5)`;
-  }
-
-  onMouseClickReset() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.buttonFocusColor}, 0.8), 0 0 1px rgba(${this.buttonFocusColor}, 0.53)`;
-  }
-
-  onMouseHover() {
-    this.el.nativeElement.style.backgroundColor = `rgba(${this.buttonColor}, 0.2)`;
-  }
-
-  onMouseHoverReset() {
-    this.el.nativeElement.style.backgroundColor = `rgba(${this.buttonColor}, 0)`;
-  }
-
-  unFocusButton() {
-    this.el.nativeElement.style.boxShadow = `0 2px 4px rgba(${this.buttonColor}, 0.5), 0 0 1px rgba(${this.buttonColor}, 0.13)`;
-    this.el.nativeElement.style.color = `rgb(${this.buttonColor})`;
-  }
-
-  resetStyle() {
-    this.el.nativeElement.style.boxShadow = `0 2px 12px rgba(${this.buttonColor}, 0.8), 0 0 1px rgba(${this.buttonColor}, 0.5)`;
   }
 
 }
