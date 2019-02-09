@@ -12,7 +12,7 @@
             <mat-panel-title>Personal Budgets</mat-panel-title>
           </mat-expansion-panel-header>
           <ng-container *ngFor="let personal of personalBudgets">
-            <div class="single-budget">
+            <div app-button color="primary" class="single-budget" (click)="openBudget(personal.payload.doc.id)">
               <div class="sections">
                 <div class="left-section">
                   <h4>{{personal.payload.doc.data().name}}</h4>
@@ -23,12 +23,7 @@
                     <button mat-menu-item (click)="openBudgetDialog(newBudget, personal.payload.doc.data())">Edit Budget
                     </button>
                   </mat-menu>
-                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-                </div>
-                <div class="right-section">
-                  <button app-button color="accent" size="md" class="open-budget"
-                          [routerLink]="'/budget/detail/' + personal.payload.doc.id">Open Budget
-                  </button>
+                  <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
                 </div>
               </div>
             </div>
@@ -40,7 +35,7 @@
         <mat-expansion-panel *ngIf="houseBudgets.length > 0">
           <mat-expansion-panel-header>HouseHold Budgets</mat-expansion-panel-header>
           <ng-container *ngFor="let household of houseBudgets">
-            <div class="single-budget">
+            <div app-button color="accent" class="single-budget" (click)="openBudget(household.payload.doc.id)">
               <div class="sections">
                 <div class="left-section">
                   <h4>{{household.payload.doc.data().name}}</h4>
@@ -52,12 +47,7 @@
                       Budget
                     </button>
                   </mat-menu>
-                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-                </div>
-                <div class="right-section">
-                  <button app-button color="accent" size="md" class="open-budget"
-                          [routerLink]="'/budget/detail/' + household.payload.doc.id">Open Budget
-                  </button>
+                  <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
                 </div>
               </div>
             </div>
@@ -69,23 +59,18 @@
         <mat-expansion-panel *ngIf="businessBudgets.length > 0">
           <mat-expansion-panel-header>Business Budgets</mat-expansion-panel-header>
           <ng-container *ngFor="let business of businessBudgets">
-            <div class="single-budget">
+            <div app-button color="warn" class="single-budget" role="button">
               <div class="sections">
                 <div class="left-section">
                   <h4>{{business.payload.doc.data().name}}</h4>
                 </div>
-                <div class="middle-section">
+                <div class="middle-section" (click)="openBudget(business.payload.doc.id)">
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="deleteBudget(business.payload.doc.id)">Delete Budget</button>
                     <button mat-menu-item (click)="openBudgetDialog(newBudget, business.payload.doc.data())">Edit Budget
                     </button>
                   </mat-menu>
-                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
-                </div>
-                <div class="right-section">
-                  <button app-button color="accent" size="md" class="open-budget"
-                          [routerLink]="'/budget/detail/' + business.payload.doc.id">Open Budget
-                  </button>
+                  <mat-icon class="touch-menu-trigger" (click)="$event.stopPropagation()" [matMenuTriggerFor]="budgetMenu">more_horiz</mat-icon>
                 </div>
               </div>
             </div>

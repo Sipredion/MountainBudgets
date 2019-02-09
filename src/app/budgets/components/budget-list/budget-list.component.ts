@@ -8,6 +8,7 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {BudgetIncomeService} from '../../services/budget-income.service';
 import {BudgetExpenseService} from '../../services/budget-expense.service';
 import {DocumentChangeAction} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-budget-list',
@@ -29,7 +30,8 @@ export class BudgetListComponent implements OnInit, OnDestroy {
 
   constructor(public authService: UserAuthService,
               public budgetService: BudgetService,
-              private dialogService: MatDialog) {
+              private dialogService: MatDialog,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -46,6 +48,10 @@ export class BudgetListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.usrSubscription.unsubscribe();
+  }
+
+  openBudget(id: string) {
+    this.router.navigateByUrl(`/budget/detail/${id}`);
   }
 
   openBudgetDialog(template, data?: Budget) {
