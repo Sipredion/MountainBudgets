@@ -10,7 +10,7 @@
       <mat-card-content>
         <div class="card-top">
           <h4>Income</h4>
-          <button app-round-button color="primary" size="sm" (click)="openDialog(addIncomeTemplate)">
+          <button app-round-button matRipple matRippleColor="rgba(46, 134, 171, 0.4)" color="primary" size="sm" (click)="openDialog(addIncomeTemplate)">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -21,12 +21,14 @@
                 <button mat-menu-item (click)="deleteIncomeStream(income.id)">Delete Income</button>
                 <button mat-menu-item (click)="openDialog(addIncomeTemplate, income)">Edit Income</button>
               </mat-menu>
-              <div class="budget-item">
-                <small class="income-name">{{income.name}}</small>
-                <div class="right-side">
-                  <small class="income-amount">{{income.amount | currency:'ZAR':'symbol-narrow'}}</small>
-                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="incomeMenu">more_vert</mat-icon>
-                </div>
+              <div class="budget-item-wrapper">
+                <button class="budget-item item-button" matRipple matRippleColor="rgba(46, 134, 171, 0.4)" (click)="openDialog(itemDetail, income)">
+                  <small class="income-name">{{income.name}}</small>
+                  <span class="right-side">
+                    <small class="income-amount">{{income.amount | currency:'ZAR':'symbol-narrow'}}</small>
+                  </span>
+                </button>
+                <mat-icon class="touch-menu-trigger" matRipple [matMenuTriggerFor]="incomeMenu">more_vert</mat-icon>
               </div>
             </ng-container>
           </ng-container>
@@ -42,7 +44,7 @@
       <mat-card-content>
         <div class="card-top">
           <h4>Expenses</h4>
-          <button app-round-button color="accent" size="sm" (click)="openDialog(addExpenseTemplate)">
+          <button app-round-button matRipple matRippleColor="rgba(114, 157, 57, 0.4)" color="accent" size="sm" (click)="openDialog(addExpenseTemplate)">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -53,12 +55,14 @@
                 <button mat-menu-item (click)="deleteExpense(expense.id)">Delete Expense</button>
                 <button mat-menu-item (click)="openDialog(addExpenseTemplate, expense)">Edit Income</button>
               </mat-menu>
-              <div class="budget-item">
-                <small class="income-name">{{expense.name}}</small>
-                <div class="right-side">
-                  <small class="income-amount">{{expense.amount | currency:'ZAR':'symbol-narrow'}}</small>
-                  <mat-icon class="touch-menu-trigger" [matMenuTriggerFor]="expenseMenu">more_vert</mat-icon>
-                </div>
+              <div class="budget-item-wrapper">
+                <button class="budget-item item-button" matRipple matRippleColor="rgba(114, 157, 57, 0.4)" (click)="openDialog(itemDetail, expense)">
+                  <small class="income-name">{{expense.name}}</small>
+                  <span class="right-side">
+                    <small class="income-amount">{{expense.amount | currency:'ZAR':'symbol-narrow'}}</small>
+                  </span>
+                </button>
+                <mat-icon class="touch-menu-trigger" matRipple [matMenuTriggerFor]="expenseMenu">more_vert</mat-icon>
               </div>
             </ng-container>
           </ng-container>
@@ -97,6 +101,10 @@
                    [expense]="selectedExpense"
                    (clearExpense)="clearSelectedExpense()"
   ></app-add-expense>
+</ng-template>
+
+<ng-template #itemDetail>
+  <app-item-detail [selectedItem]="selectedItem"></app-item-detail>
 </ng-template>
 
 <ng-template #noIncome>

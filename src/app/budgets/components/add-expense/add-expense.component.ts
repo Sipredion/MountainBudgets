@@ -33,7 +33,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
         isAutomatic: [this.expense.isAutomatic],
         isPaid: [this.expense.isPaid],
         isRecurring: [this.expense.isRecurring],
-        type: [this.expense.type, Validators.required]
       });
     } else {
       this.expenseForm = this.formBuilder.group({
@@ -44,7 +43,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
         isAutomatic: [false],
         isPaid: [false],
         isRecurring: [false],
-        type: ['', Validators.required]
       });
     }
   }

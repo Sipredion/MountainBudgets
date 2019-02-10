@@ -21,7 +21,7 @@ h5 {
 }
 
 .margin-right {
-  margin-right: 2rem;
+  margin-right: 2.8rem;
 }
 
 .single-budget-details {
@@ -33,10 +33,16 @@ h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: .5rem;
   border-bottom: 1px dashed black;
 }
 
+.budget-item-wrapper {
+  display: flex;
+}
+
 .budget-item {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,12 +54,12 @@ h5 {
 
 .total {
   color: $primary;
-  padding: .4rem 0;
+  padding: .4rem .5rem;
 }
 
 .other-total {
   color: $accent;
-  padding: .4rem 0;
+  padding: .4rem .5rem;
 }
 
 .amount-after-budget {
@@ -96,4 +102,8 @@ h5 {
 
 .mat-card>:last-child:not(.mat-card-footer) {
   margin-bottom: .5rem;
+}
+
+.item-button {
+  font-size: 14px;
 }

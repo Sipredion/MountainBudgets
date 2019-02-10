@@ -15,17 +15,17 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" placeholder="Category" formControlName="categoryName">
+        <select matNativeControl placeholder="category" formControlName="categoryName">
+          <option value="entertainment">Entertainment</option>
+          <option value="houseHold">House Hold</option>
+          <option value="business">Business</option>
+        </select>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field class="input-sm">
         <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="text" placeholder="Type" formControlName="type">
       </mat-form-field>
 
       <div class="form-toggles">

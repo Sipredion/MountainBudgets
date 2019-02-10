@@ -37,6 +37,7 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   budgetExpenseTotal: number;
   selectedExpense: Expense;
 
+  selectedItem: (IncomeStream | Expense);
   isBalancePositive: boolean;
 
   dialogRef: MatDialogRef<any>;
@@ -119,8 +120,10 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   openDialog(template, data) {
     if (data) {
       if (data instanceof Expense) {
+        this.selectedItem = data;
         this.selectedExpense = data;
       } else if (data instanceof IncomeStream) {
+        this.selectedItem = data;
         this.selectedIncome = data;
       }
     }

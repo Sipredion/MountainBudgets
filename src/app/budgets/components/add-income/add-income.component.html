@@ -16,11 +16,15 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" placeholder="Type" formControlName="type">
-        <mat-icon matSuffix matTooltip="Type of Income. E.G: Salary, Loan, Business, etc">help_outline</mat-icon>
+        <select matNativeControl placeholder="Type" formControlName="type">
+          <option value="salary">Salary</option>
+          <option value="loan">Loan</option>
+          <option value="passiveIncome">Passive Income</option>
+          <option value="onceOff">Once Off</option>
+        </select>
       </mat-form-field>
 
-      <mat-slide-toggle>Recurring?</mat-slide-toggle>
+      <mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>
 
     </div>
   </mat-dialog-content>

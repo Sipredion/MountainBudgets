@@ -57,7 +57,7 @@
           <mat-expansion-panel-header>Business Budgets</mat-expansion-panel-header>
           <ng-container *ngFor="let business of businessBudgets">
             <div class="budget-wrapper">
-              <div app-button color="warn" class="single-budget" role="button">
+              <div app-button color="warn" class="single-budget" (click)="openBudget(business.payload.doc.id)">
                 <h4>{{business.payload.doc.data().name}}</h4>
               </div>
               <mat-menu #budgetMenu="matMenu">
