@@ -1,18 +1,14 @@
 <section class="profile-page">
   <div class="profile-content" [class.active]="showProfile">
     <div class="container">
-      <mat-card>
-        <mat-card-content>
-          <ng-container [ngSwitch]="selectedSettings">
-            <ng-container *ngSwitchCase="'user'">
-              <app-user-settings></app-user-settings>
-            </ng-container>
-            <ng-container *ngSwitchCase="'app'">
-              <app-app-settings></app-app-settings>
-            </ng-container>
-          </ng-container>
-        </mat-card-content>
-      </mat-card>
+      <ng-container [ngSwitch]="selectedSettings">
+        <ng-container *ngSwitchCase="'user'">
+          <app-user-settings></app-user-settings>
+        </ng-container>
+        <ng-container *ngSwitchCase="'app'">
+          <app-app-settings></app-app-settings>
+        </ng-container>
+      </ng-container>
     </div>
 
     <!--// TODO: Move this into a separate component-->
@@ -24,13 +20,13 @@
       <nav class="app-navigation">
         <small>
           <a class="nav-item link"
-                  [class.active-tab]="selectedSettings === 'user'"
-                  (click)="selectedSettings = 'user'">User</a>
+             [class.active-tab]="selectedSettings === 'user'"
+             (click)="selectedSettings = 'user'">User</a>
         </small>
         <small>
           <a class="nav-item link"
-                  [class.active-tab]="selectedSettings === 'app'"
-                  (click)="selectedSettings = 'app'">App</a>
+             [class.active-tab]="selectedSettings === 'app'"
+             (click)="selectedSettings = 'app'">App</a>
         </small>
       </nav>
     </mat-toolbar>

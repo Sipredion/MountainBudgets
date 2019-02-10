@@ -1,3 +1,24 @@
-<p>
-  user-settings works!
-</p>
+<section class="user-settings">
+  <mat-card>
+    <mat-card-content>
+      <h3>User Settings</h3>
+    </mat-card-content>
+  </mat-card>
+  <div class="settings">
+    <div class="setting-item currency-type">
+      <small>Currency:</small>
+      <mat-form-field class="input-sm">
+        <select matNativeControl>
+          <option value="zar">ZAR</option>
+          <option value="usd">USD</option>
+          <option value="aud">AUD</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="account-actions">
+      <button class="settings-buttons" app-button color="accent" size="lg" (click)="signOut()">Logout</button>
+      <button class="settings-buttons" app-button color="warn" size="md">Delete my account</button>
+    </div>
+  </div>
+</section>
+

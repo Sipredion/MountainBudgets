@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   showProfile: boolean;
-  selectedSettings = 'app';
+  selectedSettings = 'user';
 
   constructor() {
   }
