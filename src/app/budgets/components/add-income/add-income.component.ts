@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IncomeStream} from '../../models/income-stream.model';
 import {BudgetIncomeService} from '../../services/budget-income.service';
 import {MatDialogRef} from '@angular/material';
+import {createNumberMask} from 'text-mask-addons/dist/textMaskAddons';
 
 @Component({
   selector: 'app-add-income',
@@ -19,11 +20,19 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
 
   incomeStreamForm: FormGroup;
 
+  numberMask = createNumberMask({
+    prefix: '',
+    allowDecimal: true,
+    allowNegative: true
+  });
+
   constructor(private formBuilder: FormBuilder,
               public incomeService: BudgetIncomeService) {
   }
 
   ngOnInit() {
+    this.numberMask = {mask: this.numberMask};
+
     if (this.income) {
       this.incomeStreamForm = this.formBuilder.group({
         name: [this.income.name, Validators.required],

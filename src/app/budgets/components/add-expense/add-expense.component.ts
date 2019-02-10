@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Expense} from '../../models/expense.model';
 import {BudgetExpenseService} from '../../services/budget-expense.service';
+import {createNumberMask} from 'text-mask-addons/dist/textMaskAddons';
 
 @Component({
   selector: 'app-add-expense',
@@ -19,11 +20,19 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
   expenseForm: FormGroup;
 
+  numberMask = createNumberMask({
+    prefix: '',
+    allowDecimal: true,
+    allowNegative: true
+  });
+
   constructor(private formBuilder: FormBuilder,
               public expenseService: BudgetExpenseService) {
   }
 
   ngOnInit() {
+    this.numberMask = {mask: this.numberMask};
+
     if (this.expense) {
       this.expenseForm = this.formBuilder.group({
         name: [this.expense.name, Validators.required],

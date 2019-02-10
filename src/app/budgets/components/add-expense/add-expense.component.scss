@@ -1,3 +1,5 @@
+@import "../../../../styles/partials/variables";
+
 .add-expense-title {
   text-align: center;
 }
@@ -29,4 +31,8 @@
 
 .input-sm {
   max-width: 11.5rem;
+}
+
+.currency-prefix {
+  color: $primary;
 }

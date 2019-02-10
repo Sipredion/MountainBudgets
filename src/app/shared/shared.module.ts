@@ -6,8 +6,9 @@ import {RouterModule} from '@angular/router';
 import {AppButtonDirective} from './directives/app-button.directive';
 import {RoundButtonDirective} from './directives/round-button.directive';
 import {ProfileComponent} from './components/profile/profile.component';
-import { UserSettingsComponent } from './components/profile/user-settings/user-settings.component';
-import { AppSettingsComponent } from './components/profile/app-settings/app-settings.component';
+import {UserSettingsComponent} from './components/profile/user-settings/user-settings.component';
+import {AppSettingsComponent} from './components/profile/app-settings/app-settings.component';
+import {TextMaskModule} from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AppSettingsComponent } from './components/profile/app-settings/app-sett
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    TextMaskModule
   ],
   exports: [
     // Components
@@ -34,6 +36,9 @@ import { AppSettingsComponent } from './components/profile/app-settings/app-sett
     // Directives
     AppButtonDirective,
     RoundButtonDirective,
+
+    // Modules
+    TextMaskModule
   ]
 })
 export class SharedModule {
