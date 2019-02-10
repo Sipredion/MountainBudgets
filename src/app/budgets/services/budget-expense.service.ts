@@ -28,7 +28,7 @@ export class BudgetExpenseService {
     ).snapshotChanges().pipe(
       tap(expenses => {
         if (expenses) {
-          const budgetExpenseAmounts = expenses.map(expense => expense.payload.doc.data().amount);
+          const budgetExpenseAmounts: Array<number> = expenses.map(expense => expense.payload.doc.data().amount);
           const budgetExpenseTotal = this.reduceArray(budgetExpenseAmounts);
           this.budgetExpenseTotalSrc.next(budgetExpenseTotal);
         } else {
