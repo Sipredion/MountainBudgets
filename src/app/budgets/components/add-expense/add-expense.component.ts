@@ -30,7 +30,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
         amount: [this.expense.amount, Validators.required],
         categoryName: [this.expense.categoryName, Validators.required],
         dueDate: [this.expense.dueDate],
-        isAutomatic: [this.expense.isAutomatic],
         isPaid: [this.expense.isPaid],
         isRecurring: [this.expense.isRecurring],
       });
@@ -40,7 +39,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
         amount: [0, Validators.required],
         categoryName: ['', Validators.required],
         dueDate: [''],
-        isAutomatic: [false],
         isPaid: [false],
         isRecurring: [false],
       });

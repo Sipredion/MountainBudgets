@@ -100,11 +100,9 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
             budgetId: expense.payload.doc.data().budgetId,
             categoryName: expense.payload.doc.data().categoryName,
             dueDate: expense.payload.doc.data().dueDate,
-            isAutomatic: expense.payload.doc.data().isAutomatic,
             isPaid: expense.payload.doc.data().isPaid,
             isRecurring: expense.payload.doc.data().isRecurring,
             name: expense.payload.doc.data().name,
-            type: expense.payload.doc.data().type
           })
         );
         this.expenseTotalSubscription = this.expenseService.budgetExpenseTotal.subscribe(expenseTotal => {
