@@ -26,6 +26,8 @@ export class BudgetListComponent implements OnInit, OnDestroy {
 
   selectedBudget: Budget;
 
+  isLoading: boolean;
+
   constructor(public authService: UserAuthService,
               public budgetService: BudgetService,
               private dialogService: MatDialog,
@@ -33,13 +35,17 @@ export class BudgetListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.usrSubscription = this.authService.userProfile.subscribe(user => {
       if (user) {
         this.user = user;
         this.budgetService.getAllBudgetsByUser(this.user.uid);
         this.budgetSubscription = this.budgetService.userBudgets.subscribe(budgets => {
           this.budgets = budgets;
+          this.isLoading = false;
         });
+      } else {
+        this.isLoading = false;
       }
     });
   }

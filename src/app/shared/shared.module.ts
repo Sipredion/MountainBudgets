@@ -8,20 +8,22 @@ import {RoundButtonDirective} from './directives/round-button.directive';
 import {ProfileComponent} from './components/profile/profile.component';
 import {UserSettingsComponent} from './components/profile/user-settings/user-settings.component';
 import {AppSettingsComponent} from './components/profile/app-settings/app-settings.component';
-import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
+import {SplashScreenComponent} from './components/splash-screen/splash-screen.component';
+import {SpinnerComponent} from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     // Components
     HeaderComponent,
     ProfileComponent,
+    UserSettingsComponent,
+    AppSettingsComponent,
+    SplashScreenComponent,
+    SpinnerComponent,
 
     // Directives
     AppButtonDirective,
     RoundButtonDirective,
-    UserSettingsComponent,
-    AppSettingsComponent,
-    SplashScreenComponent,
   ],
   imports: [
     CommonModule,
@@ -33,12 +35,11 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
     HeaderComponent,
     ProfileComponent,
     SplashScreenComponent,
+    SpinnerComponent,
 
     // Directives
     AppButtonDirective,
     RoundButtonDirective,
-
-    // Modules
   ]
 })
 export class SharedModule {

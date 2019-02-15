@@ -2,11 +2,11 @@ export class Expense {
   id: string;
   amount: number;
   budgetId: string;
-  categoryId: string;
-  categoryName: string;
-  dueDate: Date;
-  isPaid: boolean;
-  isRecurring: boolean;
+  categoryId?: string;
+  categoryName?: string;
+  dueDate?: Date;
+  isPaid?: boolean;
+  isRecurring?: boolean;
   name: string;
 
   constructor(options: any) {

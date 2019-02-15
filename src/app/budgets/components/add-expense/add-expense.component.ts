@@ -17,6 +17,8 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
   @Output() clearExpense = new EventEmitter();
 
+  loading: boolean;
+
   expenseForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -24,24 +26,23 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     if (this.expense) {
       this.expenseForm = this.formBuilder.group({
         name: [this.expense.name, Validators.required],
         amount: [this.expense.amount, Validators.required],
-        categoryName: [this.expense.categoryName, Validators.required],
-        dueDate: [this.expense.dueDate],
-        isPaid: [this.expense.isPaid],
-        isRecurring: [this.expense.isRecurring],
+        // categoryName: [this.expense.categoryName, Validators.required],
+        // dueDate: [this.expense.dueDate],
+        // isPaid: [this.expense.isPaid],
+        // isRecurring: [this.expense.isRecurring],
       });
     } else {
       this.expenseForm = this.formBuilder.group({
         name: ['', Validators.required],
         amount: [0, Validators.required],
-        categoryName: ['', Validators.required],
-        dueDate: [''],
-        isPaid: [false],
-        isRecurring: [false],
+        // categoryName: ['', Validators.required],
+        // dueDate: [''],
+        // isPaid: [false],
+        // isRecurring: [false],
       });
     }
   }
@@ -53,6 +54,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
   }
 
   createNewExpense(form: FormGroup) {
+    this.loading = true;
     let expense: Expense;
     if (!this.expense) {
       expense = new Expense(form.value);
@@ -62,12 +64,14 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
       this.expenseService.addExpense(Object.assign({}, expense))
         .then(() => {
           this.closeDialog();
+          this.loading = false;
         });
     } else {
       expense = form.value;
       this.expenseService.updateExpense(this.expense.id, expense)
         .then(() => {
           this.closeDialog();
+          this.loading = false;
         });
     }
   }

@@ -20,6 +20,8 @@ export class AddBudgetComponent implements OnInit {
 
   newBudgetForm: FormGroup;
 
+  loading: boolean;
+
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               public budgetService: BudgetService) {
@@ -42,11 +44,13 @@ export class AddBudgetComponent implements OnInit {
   }
 
   createNewBudget(form: FormGroup) {
+    this.loading = true;
     if (this.budget) {
       if (!form.hasError('required')) {
         this.budgetService.updateBudget(this.budget.id, Object.assign({}, form.value))
           .then(() => {
             this.closeDialog();
+            this.loading = false;
           });
       }
     } else {
@@ -62,6 +66,7 @@ export class AddBudgetComponent implements OnInit {
               .then(() => {
                 this.router.navigateByUrl(`/budget/detail/${ref.id}`);
                 this.closeDialog();
+                this.loading = false;
               });
           });
       }

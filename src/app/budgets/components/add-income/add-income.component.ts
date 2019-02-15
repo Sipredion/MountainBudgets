@@ -17,6 +17,8 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
 
   @Output() clearIncome = new EventEmitter();
 
+  loading: boolean;
+
   incomeStreamForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -24,20 +26,19 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     if (this.income) {
       this.incomeStreamForm = this.formBuilder.group({
         name: [this.income.name, Validators.required],
         amount: [this.income.amount, Validators.required],
         type: [this.income.type, Validators.required],
-        isRecurring: [this.income.isRecurring]
+        // isRecurring: [this.income.isRecurring]
       });
     } else {
       this.incomeStreamForm = this.formBuilder.group({
         name: ['', Validators.required],
         amount: [0, Validators.required],
         type: ['', Validators.required],
-        isRecurring: [false]
+        // isRecurring: [false]
       });
     }
   }
@@ -49,6 +50,7 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
   }
 
   createNewIncomeStream(form: FormGroup) {
+    this.loading = true;
     let incomeStream: IncomeStream;
     if (!this.income) {
       incomeStream = new IncomeStream(form.value);
@@ -57,12 +59,14 @@ export class AddIncomeComponent implements OnInit, OnDestroy {
       this.incomeService.addIncomeStream(Object.assign({}, incomeStream))
         .then(() => {
           this.closeDialog();
+          this.loading = false;
         });
     } else {
       incomeStream = form.value;
       this.incomeService.updaeIncomeStream(this.income.id, incomeStream)
         .then(() => {
           this.closeDialog();
+          this.loading = false;
         });
     }
   }

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start:server": "http-server -p 8000 -c-1 dist",
+    "start:server": "http-server -p 8080 -c-1 dist",
     "start:prod": "ng serve --prod",
     "start:dev": "ng serve -c dev",
     "build": "ng build",
@@ -11,8 +11,8 @@
     "build:dev": "ng build -c dev",
     "build:firebaseProd": "ng build --prod; firebase deploy",
     "build:firebaseDev": "ng build -c dev; firebase deploy",
-    "go:dev": "ng build -c dev; http-server -p 8000 -c-1 dist",
-    "go:prod": "ng build --prod; http-server -p 8000 -c-1 dist",
+    "go:dev": "ng build -c dev; http-server -p 8080 -c-1 dist",
+    "go:prod": "ng build --prod; http-server -p 8080 -c-1 dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

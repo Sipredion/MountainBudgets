@@ -5,33 +5,38 @@
         <ng-container [ngTemplateOutlet]="text"></ng-container>
       </h3>
       <hr class="app-divider">
+      <div [class.spin]="loading">
+        <app-spinner [loading]="loading" [size]="'160px'" [color]="'rgb(46, 134, 171)'">
+          <div class="add-expense-form">
+            <mat-form-field>
+              <input matInput type="text" placeholder="Name" formControlName="name">
+            </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" formControlName="name">
-      </mat-form-field>
+            <mat-form-field>
+              <p matPrefix class="currency-prefix">R</p>
+              <input matInput class="input-sm" type="number" placeholder="Amount" formControlName="amount">
+            </mat-form-field>
 
-      <mat-form-field>
-        <p matPrefix class="currency-prefix">R</p>
-        <input matInput type="number" placeholder="Amount" formControlName="amount">
-      </mat-form-field>
+            <!--<mat-form-field>-->
+              <!--<select matNativeControl placeholder="category" formControlName="categoryName">-->
+                <!--<option value="entertainment">Entertainment</option>-->
+                <!--<option value="houseHold">House Hold</option>-->
+                <!--<option value="business">Business</option>-->
+              <!--</select>-->
+            <!--</mat-form-field>-->
 
-      <mat-form-field>
-        <select matNativeControl placeholder="category" formControlName="categoryName">
-          <option value="entertainment">Entertainment</option>
-          <option value="houseHold">House Hold</option>
-          <option value="business">Business</option>
-        </select>
-      </mat-form-field>
+            <!--<mat-form-field class="input-sm">-->
+              <!--<input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate">-->
+              <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+              <!--<mat-datepicker touchUi #picker></mat-datepicker>-->
+            <!--</mat-form-field>-->
 
-      <mat-form-field class="input-sm">
-        <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker></mat-datepicker>
-      </mat-form-field>
-
-      <div class="form-toggles">
-        <mat-slide-toggle formControlName="isPaid">Already Paid?</mat-slide-toggle>
-        <mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>
+            <!--<div class="form-toggles">-->
+              <!--<mat-slide-toggle formControlName="isPaid">Already Paid?</mat-slide-toggle>-->
+              <!--<mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>-->
+            <!--</div>-->
+          </div>
+        </app-spinner>
       </div>
     </div>
   </mat-dialog-content>

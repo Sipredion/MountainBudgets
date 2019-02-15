@@ -42,6 +42,8 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
 
   dialogRef: MatDialogRef<any>;
 
+  isLoading: boolean;
+
   constructor(private budgetService: BudgetService,
               public incomeService: BudgetIncomeService,
               public expenseService: BudgetExpenseService,
@@ -53,6 +55,7 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.budgetId = this.route.snapshot.params['id'];
     this.budgetSubscription = this.budgetService.getBudgetById(this.budgetId).subscribe(budget => {
+      this.isLoading = true;
       this.selectedBudget = budget;
       this.fetchAllIncomeForBudget(this.budgetId);
       this.fetchAllExpenseForBudget(this.budgetId);
@@ -112,6 +115,7 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
       } else {
         this.budgetExpenseTotal = 0;
       }
+      this.isLoading = false;
     });
   }
 
@@ -140,7 +144,11 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteExpense(id: string) {
-    this.expenseService.deleteExpense(id);
+    this.isLoading = true;
+    this.expenseService.deleteExpense(id)
+      .then(() => {
+        this.isLoading = false;
+    });
   }
 
   clearSelectedIncome() {

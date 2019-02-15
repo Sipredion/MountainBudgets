@@ -15,6 +15,9 @@ export class UserAuthService {
   public initialLoadingSource = new BehaviorSubject<string>('loading');
   public initialLoading = this.initialLoadingSource.asObservable();
 
+  private authLoadingSource = new BehaviorSubject<boolean>(false);
+  public $authLoading = this.authLoadingSource.asObservable();
+
   public get isAuthenticated() {
     return this._isAuthenticated;
   }
@@ -48,6 +51,7 @@ export class UserAuthService {
   }
 
   createNewAuthorisedUser(user: UserProfile, password: string): Promise<void> {
+    this.authLoadingSource.next(true);
     // TODO: Send an email for user verification.
     return this.authState.auth.createUserWithEmailAndPassword(user.email, password)
       .then(authUser => {
@@ -58,25 +62,30 @@ export class UserAuthService {
             user$.subscribe(profile => {
               this.userProfileSource.next(profile.data);
               this.isAuthenticated = true;
+              this.authLoadingSource.next(false);
             });
           });
       })
       .catch(error => {
         console.log(error);
+        this.authLoadingSource.next(false);
         // TODO: Create a logging system to catch and handle errors.
       });
   }
 
   authoriseExistingUser(email: string, password: string): Promise<void> {
+    this.authLoadingSource.next(true);
     return this.authState.auth.signInWithEmailAndPassword(email, password)
       .then(authUser => {
         this.profileService.getCurrentUserProfile(authUser.user.uid).subscribe(user => {
           this.userProfileSource.next(user.data());
           this.isAuthenticated = true;
+          this.authLoadingSource.next(false);
         });
       })
       .catch(error => {
         console.log(error);
+        this.authLoadingSource.next(false);
         // TODO: Create a logging system to catch and handle errors.
       });
   }

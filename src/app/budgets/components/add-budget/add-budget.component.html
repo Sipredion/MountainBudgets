@@ -5,35 +5,38 @@
     </h4>
   </div>
   <hr class="app-divider">
-  <form [formGroup]="newBudgetForm" (ngSubmit)="createNewBudget(newBudgetForm)" class="new-budget-form">
-    <mat-form-field>
-      <input matInput type="text" placeholder="Budget Name" formControlName="name">
-    </mat-form-field>
+  <div [class.spin]="loading">
+    <app-spinner [loading]="loading" [size]="'160px'" [color]="'rgb(46, 134, 171)'">
+      <form [formGroup]="newBudgetForm" (ngSubmit)="createNewBudget(newBudgetForm)" class="new-budget-form">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Budget Name" formControlName="name">
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Budget Duration</mat-label>
-      <select matNativeControl formControlName="duration">
-        <option value="Day">Day</option>
-        <option value="Week">Week</option>
-        <option value="Month">Month</option>
-        <option value="Year">Year</option>
-      </select>
-    </mat-form-field>
+        <mat-form-field>
+          <select matNativeControl formControlName="duration" placeholder="Budget Duration">
+            <option value="Day">Day</option>
+            <option value="Week">Week</option>
+            <option value="Month">Month</option>
+            <option value="Year">Year</option>
+          </select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Type of Budget</mat-label>
-      <select matNativeControl formControlName="budgetType">
-        <option value="Personal">Personal</option>
-        <option value="Business">Business</option>
-        <option value="Household">Household</option>
-      </select>
-    </mat-form-field>
+        <mat-form-field>
+          <select matNativeControl formControlName="budgetType" placeholder="Type of Budget">
+            <option value="Personal">Personal</option>
+            <option value="Business">Business</option>
+            <option value="Household">Household</option>
+          </select>
+        </mat-form-field>
 
-    <button app-button color="primary" size="md" class="create-button" type="submit">
-      <ng-container [ngTemplateOutlet]="text"></ng-container>
-    </button>
-    <button app-button color="warn" size="sm" class="cancel-button" type="button" (click)="closeDialog()">cancel</button>
-  </form>
+        <button app-button color="primary" size="md" class="create-button" type="submit">
+          <ng-container [ngTemplateOutlet]="text"></ng-container>
+        </button>
+        <button app-button color="warn" size="sm" class="cancel-button" type="button" (click)="closeDialog()">cancel
+        </button>
+      </form>
+    </app-spinner>
+  </div>
 </section>
 
 <ng-template #text>

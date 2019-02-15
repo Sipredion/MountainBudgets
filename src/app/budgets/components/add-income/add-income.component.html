@@ -6,27 +6,31 @@
         <ng-container [ngTemplateOutlet]="text"></ng-container>
       </h3>
       <hr class="app-divider">
+      <div [class.spin]="loading">
+        <app-spinner [loading]="loading" [size]="'160px'" [color]="'rgb(46, 134, 171)'">
+          <div class="add-income-form">
+            <mat-form-field>
+              <input matInput type="text" placeholder="Name" formControlName="name">
+            </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" formControlName="name">
-      </mat-form-field>
+            <mat-form-field>
+              <input matInput class="input-sm" type="number" placeholder="Amount" formControlName="amount">
+              <p matPrefix class="currency-prefix">R</p>
+            </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="number" placeholder="Amount" formControlName="amount">
-        <p matPrefix class="currency-prefix">R</p>
-      </mat-form-field>
+            <mat-form-field>
+              <select matNativeControl placeholder="Type" formControlName="type">
+                <option value="salary">Salary</option>
+                <option value="loan">Loan</option>
+                <option value="passiveIncome">Passive Income</option>
+                <option value="onceOff">Once Off</option>
+              </select>
+            </mat-form-field>
 
-      <mat-form-field>
-        <select matNativeControl placeholder="Type" formControlName="type">
-          <option value="salary">Salary</option>
-          <option value="loan">Loan</option>
-          <option value="passiveIncome">Passive Income</option>
-          <option value="onceOff">Once Off</option>
-        </select>
-      </mat-form-field>
-
-      <mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>
-
+            <!--<mat-slide-toggle formControlName="isRecurring">Recurring?</mat-slide-toggle>-->
+          </div>
+        </app-spinner>
+      </div>
     </div>
   </mat-dialog-content>
   <div class="form-buttons">
