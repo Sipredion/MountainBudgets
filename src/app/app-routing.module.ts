@@ -10,11 +10,11 @@ const routes: Routes = [
     path: 'budget',
     loadChildren: './budgets/budgets.module#BudgetsModule'
   },
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: '/budget/list'
-  // }
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/budget/list'
+  }
 ];
 
 @NgModule({
