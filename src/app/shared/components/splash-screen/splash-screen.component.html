@@ -1,0 +1,6 @@
+<ng-container *ngIf="isInitialising === 'loaded'; else splash">
+  <ng-content></ng-content>
+</ng-container>
+<ng-template #splash>
+  <div class="splash-screen" [@fadeInOut]="isInitialising"></div>
+</ng-template>

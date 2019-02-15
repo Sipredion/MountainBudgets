@@ -8,6 +8,7 @@ import {RoundButtonDirective} from './directives/round-button.directive';
 import {ProfileComponent} from './components/profile/profile.component';
 import {UserSettingsComponent} from './components/profile/user-settings/user-settings.component';
 import {AppSettingsComponent} from './components/profile/app-settings/app-settings.component';
+import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {AppSettingsComponent} from './components/profile/app-settings/app-settin
     RoundButtonDirective,
     UserSettingsComponent,
     AppSettingsComponent,
+    SplashScreenComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import {AppSettingsComponent} from './components/profile/app-settings/app-settin
     // Components
     HeaderComponent,
     ProfileComponent,
+    SplashScreenComponent,
 
     // Directives
     AppButtonDirective,

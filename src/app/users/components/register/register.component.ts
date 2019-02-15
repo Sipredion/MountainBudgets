@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserAuthService} from '../../services/user-auth.service';
 import {UserProfile} from '../../models/user-profile.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: UserAuthService) {
+              private authService: UserAuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -34,7 +36,10 @@ export class RegisterComponent implements OnInit {
         photoUrl: photoUrl,
         username: username
       });
-      this.authService.createNewAuthorisedUser(profile, password);
+      this.authService.createNewAuthorisedUser(profile, password)
+        .then(() => {
+          this.router.navigateByUrl('/budget/list');
+        });;
     } else {
       alert('Passwords Do Not Match!');
     }

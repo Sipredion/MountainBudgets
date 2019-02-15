@@ -2,9 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {BehaviorSubject, of, pipe} from 'rxjs';
 import {UserProfile} from '../models/user-profile.model';
-import ActionCodeSettings = firebase.auth.ActionCodeSettings;
 import {UserProfileService} from './user-profile.service';
-import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +11,9 @@ export class UserAuthService {
 
   private userProfileSource = new BehaviorSubject<UserProfile>(null);
   public userProfile = this.userProfileSource.asObservable();
+
+  public initialLoadingSource = new BehaviorSubject<string>('loading');
+  public initialLoading = this.initialLoadingSource.asObservable();
 
   public get isAuthenticated() {
     return this._isAuthenticated;
@@ -27,17 +28,21 @@ export class UserAuthService {
   constructor(private authState: AngularFireAuth,
               private profileService: UserProfileService) {
     authState.authState.subscribe(user => {
-      // TODO: Create a splash screen to display while the user is re-authenticated.
       if (!user) {
         // If the authState does not return a user object, nullify values and return.
         this.isAuthenticated = false;
         this.userProfileSource.next(null);
+        this.initialLoadingSource.next('loaded');
         return;
       }
       this.profileService.getCurrentUserProfile(user.uid).subscribe(authUser => {
-        // TODO: Store the user object in session storage for faster retrieval?
+        // TODO: Store the user object in IndexedDB for faster retrieval
         this.userProfileSource.next(authUser.data());
         this.isAuthenticated = true;
+        setTimeout(() => {
+          this.initialLoadingSource.next('loaded');
+          console.log('loaded');
+        }, 1500);
       });
     });
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserAuthService} from '../../services/user-auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(public authService: UserAuthService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -24,7 +26,10 @@ export class LoginComponent implements OnInit {
 
   login(form) {
     const {email, password} = form.value;
-    this.authService.authoriseExistingUser(email, password);
+    this.authService.authoriseExistingUser(email, password)
+      .then(() => {
+        this.router.navigateByUrl('/budget/list');
+      });
   }
 
 }
