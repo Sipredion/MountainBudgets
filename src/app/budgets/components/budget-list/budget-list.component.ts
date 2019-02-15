@@ -5,8 +5,6 @@ import {BudgetService} from '../../services/budget.service';
 import {Subscription} from 'rxjs';
 import {UserProfile} from '../../../users/models/user-profile.model';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
-import {BudgetIncomeService} from '../../services/budget-income.service';
-import {BudgetExpenseService} from '../../services/budget-expense.service';
 import {DocumentChangeAction} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 

@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UserAuthService} from '../../../users/services/user-auth.service';
 import {Router} from '@angular/router';
 import {UserProfile} from '../../../users/models/user-profile.model';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,8 @@ export class HeaderComponent implements OnInit {
   @ViewChild('profileButton') profileButton: ElementRef;
 
   profileState = 'initial';
+
+  env = environment;
 
   constructor(public authService: UserAuthService,
               private router: Router) {

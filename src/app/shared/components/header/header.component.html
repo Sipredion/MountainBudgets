@@ -10,9 +10,11 @@
 </section>
 
 <ng-template #userMenu>
-  <small>
-    <a routerLink="/budget/dashboard" class="nav-item">Dashboard</a>
-  </small>
+  <ng-container *ngIf="!env.production">
+    <small>
+      <a routerLink="/budget/dashboard" class="nav-item">Dashboard</a>
+    </small>
+  </ng-container>
   <small>
     <a routerLink="/budget/list" class="nav-item">Budgets</a>
   </small>
