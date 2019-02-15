@@ -59,7 +59,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     if (!this.expense) {
       expense = new Expense(form.value);
       expense.budgetId = this.budgetId;
-      expense.categoryId = '';
       expense.id = '';
       this.expenseService.addExpense(Object.assign({}, expense))
         .then(() => {

@@ -78,7 +78,6 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
             id: incomeStream.payload.doc.id,
             amount: incomeStream.payload.doc.data().amount,
             budgetId: incomeStream.payload.doc.data().budgetId,
-            isRecurring: incomeStream.payload.doc.data().isRecurring,
             name: incomeStream.payload.doc.data().name,
             type: incomeStream.payload.doc.data().type,
           })
@@ -101,10 +100,6 @@ export class BudgetDetailComponent implements OnInit, OnDestroy {
             id: expense.payload.doc.id,
             amount: expense.payload.doc.data().amount,
             budgetId: expense.payload.doc.data().budgetId,
-            categoryName: expense.payload.doc.data().categoryName,
-            dueDate: expense.payload.doc.data().dueDate,
-            isPaid: expense.payload.doc.data().isPaid,
-            isRecurring: expense.payload.doc.data().isRecurring,
             name: expense.payload.doc.data().name,
           })
         );
