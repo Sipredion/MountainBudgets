@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() user: UserProfile;
 
-  @ViewChild('profileButton') profileButton: ElementRef;
+  @ViewChild('profileButton', { static: false }) profileButton: ElementRef;
 
   profileState = 'initial';
 
