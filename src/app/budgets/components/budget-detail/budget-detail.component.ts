@@ -17,7 +17,7 @@ import {Location} from '@angular/common';
 })
 export class BudgetDetailComponent implements OnInit, OnDestroy {
 
-  @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
+  @ViewChild('menuTrigger', { static: false }) menuTrigger: MatMenuTrigger;
 
   budgetSubscription: Subscription;
   incomeStreamSubscription: Subscription;

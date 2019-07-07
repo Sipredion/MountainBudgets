@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'user',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'budget',
-    loadChildren: './budgets/budgets.module#BudgetsModule'
+    loadChildren: () => import('./budgets/budgets.module').then(m => m.BudgetsModule)
   },
   {
     path: '',
