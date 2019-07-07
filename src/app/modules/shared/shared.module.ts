@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MaterialModule} from '../material/material.module';
+import {MaterialModule} from './material/material.module';
 import {HeaderComponent} from './components/header/header.component';
 import {RouterModule} from '@angular/router';
 import {AppButtonDirective} from './directives/app-button.directive';
@@ -24,8 +24,10 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
     // Directives
     AppButtonDirective,
     RoundButtonDirective,
+
   ],
   imports: [
+    // Modules
     CommonModule,
     RouterModule,
     MaterialModule,
@@ -40,6 +42,9 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
     // Directives
     AppButtonDirective,
     RoundButtonDirective,
+
+    // Modules
+    MaterialModule
   ]
 })
 export class SharedModule {

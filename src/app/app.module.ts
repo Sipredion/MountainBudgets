@@ -7,9 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {MaterialModule} from './material/material.module';
-import {FirebaseModule} from './firebase/firebase.module';
-import {SharedModule} from './shared/shared.module';
+import {FirebaseModule} from './modules/firebase/firebase.module';
+import {SharedModule} from './modules/shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     FirebaseModule,
-    MaterialModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

@@ -2,7 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UserAuthService} from '../../../users/services/user-auth.service';
 import {Router} from '@angular/router';
 import {UserProfile} from '../../../users/models/user-profile.model';
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-header',

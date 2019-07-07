@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserAuthService} from './users/services/user-auth.service';
+import {UserAuthService} from './modules/users/services/user-auth.service';
 import {SwUpdate} from '@angular/service-worker';
 
 @Component({
